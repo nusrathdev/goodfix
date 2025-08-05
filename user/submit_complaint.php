@@ -32,6 +32,10 @@ if ($_POST) {
             $stmt->execute([$student_name, $student_id, $email, $department, $complaint_type, $subject, $description, $priority]);
             
             $complaint_id = $pdo->lastInsertId();
+            
+            // Set cookie to save complaint ID for tracking
+            setcookie('last_complaint_id', $complaint_id, time() + (30 * 24 * 60 * 60), '/'); // 30 days
+            
             header("Location: submit_success.php?id=" . $complaint_id);
             exit();
         } catch (PDOException $e) {
@@ -48,7 +52,7 @@ if ($_POST) {
                 <!-- Header -->
                 <div class="text-center mb-5">
                     <h1 class="fw-bold">
-                        <i class="bi bi-plus-circle text-primary"></i> Submit Complaint
+                        Submit Complaint
                     </h1>
                     <p class="lead text-muted">Tell us about your issue and we'll work to resolve it</p>
                 </div>
@@ -56,7 +60,7 @@ if ($_POST) {
                 <!-- Alert Messages -->
                 <?php if ($error_message): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="bi bi-exclamation-triangle"></i> <?php echo $error_message; ?>
+                    <?php echo $error_message; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
                 <?php endif; ?>
@@ -142,11 +146,14 @@ if ($_POST) {
                             <!-- Form Actions -->
                             <div class="d-flex gap-3">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-send"></i> Submit Complaint
+                                    Submit Complaint
                                 </button>
                                 <a href="index.php" class="btn btn-outline-secondary">
-                                    <i class="bi bi-arrow-left"></i> Back to Home
+                                    Back to Home
                                 </a>
+                                <button type="button" class="btn btn-outline-warning btn-sm">
+                                    Clear Saved Data
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -155,5 +162,95 @@ if ($_POST) {
         </div>
     </div>
 </main>
+
+<!-- Auto-fill Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('complaintForm');
+    
+    // Auto-fill form with saved data
+    function loadSavedData() {
+        const savedData = localStorage.getItem('goodfix_user_data');
+        if (savedData) {
+            const userData = JSON.parse(savedData);
+            
+            // Fill form fields
+            if (userData.student_name) document.getElementById('student_name').value = userData.student_name;
+            if (userData.student_id) document.getElementById('student_id').value = userData.student_id;
+            if (userData.email) document.getElementById('email').value = userData.email;
+            if (userData.department) document.getElementById('department').value = userData.department;
+        }
+    }
+    
+    // Save form data to localStorage
+    function saveUserData() {
+        const userData = {
+            student_name: document.getElementById('student_name').value,
+            student_id: document.getElementById('student_id').value,
+            email: document.getElementById('email').value,
+            department: document.getElementById('department').value,
+            last_updated: new Date().toISOString()
+        };
+        
+        localStorage.setItem('goodfix_user_data', JSON.stringify(userData));
+    }
+    
+    // Save data when form fields change
+    ['student_name', 'student_id', 'email', 'department'].forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        field.addEventListener('blur', saveUserData);
+    });
+    
+    // Save complaint ID to list when form is submitted
+    form.addEventListener('submit', function() {
+        // Save user data
+        saveUserData();
+        
+        // This will run after successful submission
+        setTimeout(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const complaintId = urlParams.get('id');
+            if (complaintId) {
+                let myComplaints = JSON.parse(localStorage.getItem('goodfix_my_complaints') || '[]');
+                
+                const complaintData = {
+                    id: complaintId,
+                    subject: document.getElementById('subject').value,
+                    submitted_at: new Date().toISOString(),
+                    status: 'pending'
+                };
+                
+                myComplaints.unshift(complaintData);
+                
+                // Keep only last 20 complaints
+                if (myComplaints.length > 20) {
+                    myComplaints = myComplaints.slice(0, 20);
+                }
+                
+                localStorage.setItem('goodfix_my_complaints', JSON.stringify(myComplaints));
+            }
+        }, 100);
+    });
+    
+    // Load saved data on page load
+    loadSavedData();
+    
+    // Add clear data button
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'btn btn-outline-warning btn-sm';
+    clearBtn.innerHTML = 'Clear Saved Data';
+    clearBtn.onclick = function() {
+        if (confirm('Are you sure you want to clear your saved information?')) {
+            localStorage.removeItem('goodfix_user_data');
+            form.reset();
+        }
+    };
+    
+    // Add clear button next to form actions
+    const formActions = document.querySelector('.d-flex.gap-3');
+    formActions.appendChild(clearBtn);
+});
+</script>
 
 <?php include '../includes/footer.php'; ?>

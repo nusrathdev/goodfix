@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5><i class="bi bi-tools"></i> GoodFix</h5>
+                    <h5>GoodFix</h5>
                     <p class="mb-0">University Complaint Management System</p>
                 </div>
                 <div class="col-md-6 text-md-end">

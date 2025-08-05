@@ -62,6 +62,19 @@ if ($_POST && isset($_POST['search_type'])) {
                     <p class="lead text-muted">Enter your complaint details to check status and updates</p>
                 </div>
 
+                <!-- My Complaints from Browser Cache -->
+                <div class="card mb-4" id="myComplaintsCard" style="display: none;">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-bookmark-heart"></i> My Recent Complaints
+                            <small class="float-end">Saved in your browser</small>
+                        </h5>
+                    </div>
+                    <div class="card-body" id="myComplaintsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
                 <!-- Search Form -->
                 <?php if (!$complaint): ?>
                 <div class="card mb-4">
@@ -233,5 +246,136 @@ if ($_POST && isset($_POST['search_type'])) {
     z-index: -1;
 }
 </style>
+
+<!-- JavaScript for My Complaints -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const myComplaintsCard = document.getElementById('myComplaintsCard');
+    const myComplaintsList = document.getElementById('myComplaintsList');
+    
+    // Load saved complaints from localStorage
+    function loadMyComplaints() {
+        const savedComplaints = localStorage.getItem('goodfix_my_complaints');
+        if (savedComplaints) {
+            const complaints = JSON.parse(savedComplaints);
+            if (complaints.length > 0) {
+                myComplaintsCard.style.display = 'block';
+                displayComplaints(complaints);
+            }
+        }
+    }
+    
+    // Display complaints in the card
+    function displayComplaints(complaints) {
+        let html = '<div class="row g-3">';
+        
+        complaints.forEach(function(complaint, index) {
+            const statusColor = getStatusColor(complaint.status);
+            const priorityColor = getPriorityColor(complaint.priority);
+            const date = new Date(complaint.submitted_at).toLocaleDateString();
+            
+            html += `
+                <div class="col-md-6">
+                    <div class="card h-100 border-start border-3 border-${statusColor}">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="track_complaint.php?id=${complaint.id}" class="text-decoration-none">
+                                    #${String(complaint.id).padStart(4, '0')}
+                                </a>
+                                <span class="badge bg-${statusColor} float-end">${complaint.status}</span>
+                            </h6>
+                            <p class="card-text text-truncate" title="${complaint.subject}">
+                                ${complaint.subject}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar3"></i> ${date}
+                                </small>
+                                <span class="badge priority-${complaint.priority}">${complaint.priority}</span>
+                            </div>
+                            <div class="mt-2">
+                                <a href="track_complaint.php?id=${complaint.id}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye"></i> Track
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        
+        // Add clear all button
+        html += `
+            <div class="text-center mt-3">
+                <button class="btn btn-outline-danger btn-sm" onclick="clearMyComplaints()">
+                    <i class="bi bi-trash"></i> Clear All Saved Complaints
+                </button>
+            </div>
+        `;
+        
+        myComplaintsList.innerHTML = html;
+    }
+    
+    // Helper function to get status color
+    function getStatusColor(status) {
+        switch(status) {
+            case 'pending': return 'warning';
+            case 'in_progress': return 'primary';
+            case 'resolved': return 'success';
+            case 'closed': return 'secondary';
+            default: return 'secondary';
+        }
+    }
+    
+    // Helper function to get priority color
+    function getPriorityColor(priority) {
+        switch(priority) {
+            case 'low': return 'success';
+            case 'medium': return 'warning';
+            case 'high': return 'danger';
+            case 'urgent': return 'danger';
+            default: return 'secondary';
+        }
+    }
+    
+    // Clear all saved complaints
+    window.clearMyComplaints = function() {
+        if (confirm('Are you sure you want to clear all saved complaints from your browser?')) {
+            localStorage.removeItem('goodfix_my_complaints');
+            myComplaintsCard.style.display = 'none';
+            
+            // Show success message
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show';
+            alertDiv.innerHTML = `
+                <i class="bi bi-check-circle"></i> All saved complaints have been cleared.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.container').firstChild);
+        }
+    };
+    
+    // Auto-fill form with saved user data
+    function autoFillForm() {
+        const savedData = localStorage.getItem('goodfix_user_data');
+        if (savedData) {
+            const userData = JSON.parse(savedData);
+            
+            // Auto-select email if available
+            if (userData.email && document.getElementById('search_type')) {
+                document.getElementById('search_type').value = 'email';
+                document.getElementById('search_value').value = userData.email;
+                document.getElementById('search_value').placeholder = 'Your saved email: ' + userData.email;
+            }
+        }
+    }
+    
+    // Load complaints and auto-fill on page load
+    loadMyComplaints();
+    autoFillForm();
+});
+</script>
 
 <?php include '../includes/footer.php'; ?>

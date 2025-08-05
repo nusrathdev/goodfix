@@ -16,21 +16,68 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand fw-bold" href="<?php echo isset($home_path) ? $home_path : '../user/index.php'; ?>">
-                <i class="bi bi-tools"></i> GoodFix
+                GoodFix
             </a>
             
             <?php if (isset($show_admin_nav) && $show_admin_nav): ?>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="dashboard.php">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+                    Dashboard
                 </a>
                 <a class="nav-link" href="view_complaints.php">
-                    <i class="bi bi-list-ul"></i> Complaints
+                    Complaints
                 </a>
                 <a class="nav-link" href="logout.php">
-                    <i class="bi bi-box-arrow-right"></i> Logout
+                    Logout
                 </a>
             </div>
+            <?php else: ?>
+            <!-- Student Navigation -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="<?php echo isset($home_path) ? $home_path : '../user/index.php'; ?>">
+                        Home
+                    </a>
+                    <a class="nav-link" href="<?php echo isset($home_path) ? str_replace('index.php', 'submit_complaint.php', $home_path) : '../user/submit_complaint.php'; ?>">
+                        Submit
+                    </a>
+                    <a class="nav-link" href="<?php echo isset($home_path) ? str_replace('index.php', 'track_complaint.php', $home_path) : '../user/track_complaint.php'; ?>">
+                        Track
+                    </a>
+                    <a class="nav-link" href="<?php echo isset($home_path) ? str_replace('index.php', 'profile.php', $home_path) : '../user/profile.php'; ?>">
+                        Profile
+                    </a>
+                    <span class="navbar-text" id="savedComplaintsIndicator" style="display: none;">
+                        <small class="badge bg-success">
+                            <span id="savedCount">0</span> saved
+                        </small>
+                    </span>
+                </div>
+            </div>
             <?php endif; ?>
+        </div>
+    </nav>
+    
+    <!-- JavaScript for navigation indicators -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show saved complaints indicator
+        const savedComplaints = localStorage.getItem('goodfix_my_complaints');
+        if (savedComplaints) {
+            const complaints = JSON.parse(savedComplaints);
+            if (complaints.length > 0) {
+                const indicator = document.getElementById('savedComplaintsIndicator');
+                const countElement = document.getElementById('savedCount');
+                if (indicator && countElement) {
+                    countElement.textContent = complaints.length;
+                    indicator.style.display = 'block';
+                }
+            }
+        }
+    });
+    </script>
         </div>
     </nav>

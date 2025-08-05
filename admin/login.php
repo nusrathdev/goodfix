@@ -51,7 +51,6 @@ if ($_POST) {
                             <!-- Header -->
                             <div class="text-center mb-4">
                                 <h2 class="fw-bold">
-                                    <i class="bi bi-shield-lock text-primary"></i><br>
                                     Admin Login
                                 </h2>
                                 <p class="text-muted">GoodFix Management Portal</p>
@@ -60,7 +59,7 @@ if ($_POST) {
                             <!-- Error Message -->
                             <?php if ($error_message): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="bi bi-exclamation-triangle"></i> <?php echo $error_message; ?>
+                                <?php echo $error_message; ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                             <?php endif; ?>
@@ -69,28 +68,18 @@ if ($_POST) {
                             <form method="POST">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="bi bi-person"></i>
-                                        </span>
-                                        <input type="text" class="form-control" id="username" name="username" 
-                                               value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" 
-                                               required autofocus>
-                                    </div>
+                                    <input type="text" class="form-control" id="username" name="username" 
+                                           value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>" 
+                                           required autofocus>
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Password</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="bi bi-lock"></i>
-                                        </span>
-                                        <input type="password" class="form-control" id="password" name="password" required>
-                                    </div>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary w-100 mb-3">
-                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                    Login
                                 </button>
                             </form>
 
@@ -106,7 +95,7 @@ if ($_POST) {
                             <!-- Back to Home -->
                             <div class="text-center">
                                 <a href="../user/index.php" class="btn btn-outline-secondary btn-sm">
-                                    <i class="bi bi-arrow-left"></i> Back to GoodFix
+                                    Back to GoodFix
                                 </a>
                             </div>
                         </div>
