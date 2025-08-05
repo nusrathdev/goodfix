@@ -1,0 +1,130 @@
+/* GoodFix Custom Styles */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #495057 100%);
+    color: white;
+    padding: 4rem 0;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Status badges */
+.status-pending {
+    background-color: var(--warning-color);
+    color: #000;
+}
+
+.status-in_progress {
+    background-color: var(--primary-color);
+}
+
+.status-resolved {
+    background-color: var(--success-color);
+}
+
+.status-closed {
+    background-color: var(--secondary-color);
+}
+
+/* Priority badges */
+.priority-low {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.priority-medium {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.priority-high {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.priority-urgent {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Login form */
+.login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Dashboard stats */
+.stat-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card.pending {
+    border-left-color: var(--warning-color);
+}
+
+.stat-card.in-progress {
+    border-left-color: var(--primary-color);
+}
+
+.stat-card.resolved {
+    border-left-color: var(--success-color);
+}
+
+.stat-card.closed {
+    border-left-color: var(--secondary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}
