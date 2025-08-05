@@ -69,7 +69,7 @@ web_devproject-1/
 
 ### Step 1: Clone/Download
 ```bash
-git clone [<your-repo-url>](https://github.com/nusrathdev/web_devproject.git)
+git clone https://github.com/nusrathdev/web_devproject.git
 cd web_devproject
 ```
 
