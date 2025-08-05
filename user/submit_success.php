@@ -44,10 +44,20 @@ if (!$complaint) {
                         </h5>
                     </div>
                     <div class="card-body">
+                        <?php 
+                        // Generate reference number format: GF-YYYY-XXXX
+                        $reference_no = 'GF-' . date('Y', strtotime($complaint['submitted_at'])) . '-' . str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                        ?>
                         <div class="row">
                             <div class="col-md-6">
-                                <h6 class="fw-bold">Complaint ID:</h6>
-                                <p class="text-primary fs-4 fw-bold">#<?php echo str_pad($complaint['id'], 4, '0', STR_PAD_LEFT); ?></p>
+                                <h6 class="fw-bold">Reference Number:</h6>
+                                <div class="d-flex align-items-center">
+                                    <p class="text-primary fs-4 fw-bold mb-0 me-3" id="referenceNumber"><?php echo $reference_no; ?></p>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="copyReference()" id="copyBtn">
+                                        <i class="bi bi-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <small class="text-muted">Save this reference number to track your complaint</small>
                                 
                                 <h6 class="fw-bold">Student Name:</h6>
                                 <p><?php echo htmlspecialchars($complaint['student_name']); ?></p>
@@ -111,47 +121,84 @@ if (!$complaint) {
     </div>
 </main>
 
-<!-- Save complaint to localStorage -->
+<!-- Reference number copy functionality -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Save this complaint to localStorage
-    const complaintData = {
-        id: <?php echo $complaint['id']; ?>,
-        subject: "<?php echo addslashes($complaint['subject']); ?>",
-        student_name: "<?php echo addslashes($complaint['student_name']); ?>",
-        status: "<?php echo $complaint['status']; ?>",
-        priority: "<?php echo $complaint['priority']; ?>",
-        submitted_at: "<?php echo $complaint['submitted_at']; ?>"
-    };
-    
-    // Get existing complaints or create new array
-    let myComplaints = JSON.parse(localStorage.getItem('goodfix_my_complaints') || '[]');
-    
-    // Add new complaint to the beginning
-    myComplaints.unshift(complaintData);
-    
-    // Keep only last 20 complaints
-    if (myComplaints.length > 20) {
-        myComplaints = myComplaints.slice(0, 20);
-    }
-    
-    // Save back to localStorage
-    localStorage.setItem('goodfix_my_complaints', JSON.stringify(myComplaints));
-    
-    // Show notification
+    // Show important notice about reference number
     setTimeout(function() {
         const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
-        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 350px;';
+        alertDiv.className = 'alert alert-warning alert-dismissible fade show position-fixed';
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
         alertDiv.innerHTML = `
-            <i class="bi bi-check-circle"></i> <strong>Complaint saved!</strong><br>
-            Your complaint has been automatically saved to your browser for easy tracking.
+            <i class="bi bi-exclamation-triangle"></i> <strong>Important!</strong><br>
+            Please save your reference number <strong><?php echo $reference_no; ?></strong> to track your complaint.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
         document.body.appendChild(alertDiv);
         
-        // Auto-hide after 5 seconds
+        // Auto-hide after 8 seconds
         setTimeout(function() {
+            if (alertDiv && alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 8000);
+    }, 1000);
+});
+
+// Copy reference number function
+function copyReference() {
+    const referenceNumber = document.getElementById('referenceNumber').textContent;
+    const copyBtn = document.getElementById('copyBtn');
+    
+    navigator.clipboard.writeText(referenceNumber).then(function() {
+        // Update button to show success
+        copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        copyBtn.classList.remove('btn-outline-primary');
+        copyBtn.classList.add('btn-success');
+        
+        // Revert button after 2 seconds
+        setTimeout(function() {
+            copyBtn.innerHTML = '<i class="bi bi-copy"></i> Copy';
+            copyBtn.classList.remove('btn-success');
+            copyBtn.classList.add('btn-outline-primary');
+        }, 2000);
+        
+        // Show success message
+        const successDiv = document.createElement('div');
+        successDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        successDiv.style.cssText = 'bottom: 20px; right: 20px; z-index: 9999; max-width: 300px;';
+        successDiv.innerHTML = `
+            <i class="bi bi-clipboard-check"></i> Reference number copied to clipboard!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(successDiv);
+        
+        setTimeout(function() {
+            if (successDiv && successDiv.parentNode) {
+                successDiv.remove();
+            }
+        }, 3000);
+    }).catch(function() {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = referenceNumber;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        copyBtn.classList.remove('btn-outline-primary');
+        copyBtn.classList.add('btn-success');
+        
+        setTimeout(function() {
+            copyBtn.innerHTML = '<i class="bi bi-copy"></i> Copy';
+            copyBtn.classList.remove('btn-success');
+            copyBtn.classList.add('btn-outline-primary');
+        }, 2000);
+    });
+}
+</script>
             if (alertDiv.parentNode) {
                 alertDiv.remove();
             }

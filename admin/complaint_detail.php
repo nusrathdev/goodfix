@@ -52,12 +52,19 @@ if (!$complaint) {
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
+                <?php 
+                // Generate reference number format: GF-YYYY-XXXX
+                $reference_no = 'GF-' . date('Y', strtotime($complaint['submitted_at'])) . '-' . str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                ?>
                 <h1 class="fw-bold">
                     <i class="bi bi-file-earmark-text text-primary"></i> 
-                    Complaint #<?php echo str_pad($complaint['id'], 4, '0', STR_PAD_LEFT); ?>
+                    Reference: <?php echo $reference_no; ?>
                 </h1>
                 <p class="text-muted mb-0">
                     Submitted on <?php echo date('F j, Y \a\t g:i A', strtotime($complaint['submitted_at'])); ?>
+                    <span class="badge status-<?php echo $complaint['status']; ?> ms-2">
+                        <?php echo ucfirst(str_replace('_', ' ', $complaint['status'])); ?>
+                    </span>
                 </p>
             </div>
             <div>
@@ -115,6 +122,12 @@ if (!$complaint) {
                             <div class="col-md-6">
                                 <h6 class="fw-bold text-muted">COMPLAINT DETAILS</h6>
                                 <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td class="fw-bold">Reference:</td>
+                                        <td>
+                                            <span class="text-primary fw-bold"><?php echo $reference_no; ?></span>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td class="fw-bold">Type:</td>
                                         <td>
