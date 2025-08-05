@@ -69,8 +69,8 @@ web_devproject-1/
 
 ### Step 1: Clone/Download
 ```bash
-git clone <your-repo-url>
-cd web_devproject-1
+git clone [<your-repo-url>](https://github.com/nusrathdev/web_devproject.git)
+cd web_devproject
 ```
 
 ### Step 2: Database Setup
@@ -83,20 +83,20 @@ mysql -u your_username -p goodfix_complaints < sql/complaints.sql
 ### Step 3: Configure Database Connection
 Edit `includes/db.php` and update the database credentials:
 ```php
-$host = 'localhost';        // Your database host
-$dbname = 'goodfix_complaints'; // Database name
-$username = 'your_username';     // Database username
-$password = 'your_password';     // Database password
+$host = 'localhost';        // Your db host
+$dbname = 'goodfix_complaints'; // db name
+$username = 'your_username';     // db username
+$password = 'your_password';     // db password
 ```
 
 ### Step 4: Set Permissions
 Ensure the web server has read access to all files:
 ```bash
-chmod -R 755 web_devproject-1/
+chmod -R 755 web_devproject/
 ```
 
 ### Step 5: Access the Application
-- **Student Portal**: `http://your-domain/user/index.php`
+- **Student Portal**: `http://our-domain/user/index.php`
 - **Admin Panel**: `http://your-domain/admin/login.php`
 
 ## 🔐 Default Admin Credentials
@@ -215,23 +215,9 @@ ini_set('display_errors', 1);
 - Multi-language support
 - REST API for mobile app integration
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
-
-## 👥 Support
-
-For support and questions:
-- Create an issue in the repository
-- Email: support@university.edu
 
 ---
 
