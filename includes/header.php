@@ -50,11 +50,6 @@
                     <a class="nav-link" href="<?php echo isset($home_path) ? str_replace('index.php', 'profile.php', $home_path) : '../user/profile.php'; ?>">
                         Profile
                     </a>
-                    <span class="navbar-text" id="savedComplaintsIndicator" style="display: none;">
-                        <small class="badge bg-success">
-                            <span id="savedCount">0</span> saved
-                        </small>
-                    </span>
                 </div>
             </div>
             <?php endif; ?>
