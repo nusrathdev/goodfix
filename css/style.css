@@ -1,45 +1,38 @@
-/* GoodFix Custom Styles */
+/* GoodFix Simple Styles */
 
 :root {
-    --primary-color: #0d6efd;
+    --primary-color: #0066cc;
     --secondary-color: #6c757d;
-    --success-color: #198754;
+    --success-color: #28a745;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
+    --light-gray: #f8f9fa;
+    --border-color: #dee2e6;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: var(--light-gray);
+    line-height: 1.6;
+    color: #333;
 }
 
-main {
-    flex: 1;
-}
-
-/* Hero Section */
+/* Simple Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #495057 100%);
+    background-color: var(--primary-color);
     color: white;
-    padding: 4rem 0;
+    padding: 3rem 0;
+    text-align: center;
 }
 
-/* Cards */
+/* Simple Cards */
 .card {
-    border: none;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1rem;
 }
 
-.card:hover {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
-/* Status badges */
+/* Status badges - Simple colors */
 .status-pending {
     background-color: var(--warning-color);
     color: #000;
@@ -47,59 +40,126 @@ main {
 
 .status-in_progress {
     background-color: var(--primary-color);
+    color: white;
 }
 
 .status-resolved {
     background-color: var(--success-color);
+    color: white;
 }
 
 .status-closed {
     background-color: var(--secondary-color);
+    color: white;
 }
 
-/* Priority badges */
+.status-closed {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Priority badges - Simple */
 .priority-low {
     background-color: #d4edda;
     color: #155724;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
 }
 
 .priority-medium {
     background-color: #fff3cd;
     color: #856404;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
 }
 
 .priority-high {
     background-color: #f8d7da;
     color: #721c24;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
 }
 
 .priority-urgent {
-    background-color: #dc3545;
+    background-color: var(--danger-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Simple Form styling */
+.form-control {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: none;
+    outline: 2px solid rgba(0, 102, 204, 0.2);
+}
+
+/* Simple Button styling */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
     color: white;
 }
 
-/* Form styling */
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-/* Login form */
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Simple Login form */
 .login-container {
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2rem 0;
 }
 
 .login-card {
     max-width: 400px;
     width: 100%;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
 }
 
-/* Dashboard stats */
+/* Simple Dashboard stats */
 .stat-card {
     border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
 }
 
 .stat-card.pending {
@@ -118,13 +178,45 @@ main {
     border-left-color: var(--secondary-color);
 }
 
-/* Responsive adjustments */
+/* Simple Table styling */
+.table {
+    background-color: white;
+}
+
+.table th {
+    background-color: var(--light-gray);
+    border-bottom: 2px solid var(--border-color);
+    font-weight: bold;
+}
+
+.table td {
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+/* Simple responsive adjustments */
 @media (max-width: 768px) {
     .hero-section {
         padding: 2rem 0;
     }
     
     .hero-section h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .table-responsive {
+        font-size: 14px;
+    }
+}
+
+/* Remove all animations and transitions */
+*, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
 }

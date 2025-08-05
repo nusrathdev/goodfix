@@ -111,4 +111,53 @@ if (!$complaint) {
     </div>
 </main>
 
+<!-- Save complaint to localStorage -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Save this complaint to localStorage
+    const complaintData = {
+        id: <?php echo $complaint['id']; ?>,
+        subject: "<?php echo addslashes($complaint['subject']); ?>",
+        student_name: "<?php echo addslashes($complaint['student_name']); ?>",
+        status: "<?php echo $complaint['status']; ?>",
+        priority: "<?php echo $complaint['priority']; ?>",
+        submitted_at: "<?php echo $complaint['submitted_at']; ?>"
+    };
+    
+    // Get existing complaints or create new array
+    let myComplaints = JSON.parse(localStorage.getItem('goodfix_my_complaints') || '[]');
+    
+    // Add new complaint to the beginning
+    myComplaints.unshift(complaintData);
+    
+    // Keep only last 20 complaints
+    if (myComplaints.length > 20) {
+        myComplaints = myComplaints.slice(0, 20);
+    }
+    
+    // Save back to localStorage
+    localStorage.setItem('goodfix_my_complaints', JSON.stringify(myComplaints));
+    
+    // Show notification
+    setTimeout(function() {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 350px;';
+        alertDiv.innerHTML = `
+            <i class="bi bi-check-circle"></i> <strong>Complaint saved!</strong><br>
+            Your complaint has been automatically saved to your browser for easy tracking.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        // Auto-hide after 5 seconds
+        setTimeout(function() {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
+    }, 1000);
+});
+</script>
+
 <?php include '../includes/footer.php'; ?>
