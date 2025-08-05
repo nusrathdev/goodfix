@@ -53,8 +53,11 @@ if (!$complaint) {
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <?php 
-                // Generate reference number format: GF-YYYY-XXXX
-                $reference_no = 'GF-' . date('Y', strtotime($complaint['submitted_at'])) . '-' . str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                // Generate complex reference number format: GFX-YYYYMM-XXXX-HASH
+                $year_month = date('Ym', strtotime($complaint['submitted_at']));
+                $complaint_id_padded = str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                $hash = strtoupper(substr(md5($complaint['id'] . $complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                $reference_no = 'GFX-' . $year_month . '-' . $complaint_id_padded . '-' . $hash;
                 ?>
                 <h1 class="fw-bold">
                     <i class="bi bi-file-earmark-text text-primary"></i> 

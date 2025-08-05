@@ -30,19 +30,30 @@ if ($_POST && isset($_POST['reference_no'])) {
         $error_message = "Please enter a reference number.";
     } else {
         // Extract the complaint ID from the reference number
-        // Reference format: GF-YYYY-XXXX (e.g., GF-2025-1234)
-        if (preg_match('/^GF-\d{4}-(\d+)$/', $reference_no, $matches)) {
+        // Reference format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)
+        if (preg_match('/^GFX-\d{6}-(\d+)-[A-Z0-9]{4}$/', $reference_no, $matches)) {
             $complaint_id = (int)$matches[1];
             
+            // Verify the hash matches
             $stmt = $pdo->prepare("SELECT * FROM complaints WHERE id = ?");
             $stmt->execute([$complaint_id]);
-            $complaint = $stmt->fetch();
+            $temp_complaint = $stmt->fetch();
             
-            if (!$complaint) {
+            if ($temp_complaint) {
+                // Generate expected hash for verification
+                $expected_hash = strtoupper(substr(md5($temp_complaint['id'] . $temp_complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                $provided_hash = substr($reference_no, -4);
+                
+                if ($expected_hash === $provided_hash) {
+                    $complaint = $temp_complaint;
+                } else {
+                    $error_message = "Invalid reference number: " . htmlspecialchars($reference_no);
+                }
+            } else {
                 $error_message = "No complaint found with reference number: " . htmlspecialchars($reference_no);
             }
         } else {
-            $error_message = "Invalid reference number format. Please use format: GF-YYYY-XXXX (e.g., GF-2025-1234)";
+            $error_message = "Invalid reference number format. Please use format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)";
         }
     }
 }
@@ -74,14 +85,14 @@ if ($_POST && isset($_POST['reference_no'])) {
                             <div class="mb-3">
                                 <label for="reference_no" class="form-label fw-semibold">Complaint Reference Number</label>
                                 <input type="text" class="form-control form-control-lg" id="reference_no" name="reference_no" 
-                                       placeholder="e.g., GF-2025-1234"
-                                       pattern="^GF-\d{4}-\d+$"
-                                       title="Reference format: GF-YYYY-XXXX (e.g., GF-2025-1234)"
+                                       placeholder="e.g., GFX-202508-1234-A7B9"
+                                       pattern="^GFX-\d{6}-\d+-[A-Z0-9]{4}$"
+                                       title="Reference format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)"
                                        value="<?php echo isset($_POST['reference_no']) ? htmlspecialchars($_POST['reference_no']) : ''; ?>" 
                                        required>
                                 <div class="form-text">
                                     <i class="bi bi-info-circle text-primary"></i> 
-                                    Reference number format: <strong>GF-YYYY-XXXX</strong> (Example: GF-2025-1234)
+                                    Reference number format: <strong>GFX-YYYYMM-XXXX-HASH</strong> (Example: GFX-202508-1234-A7B9)
                                 </div>
                             </div>
                             
@@ -116,8 +127,11 @@ if ($_POST && isset($_POST['reference_no'])) {
                 <!-- Complaint Details -->
                 <?php if ($complaint): ?>
                 <?php 
-                // Generate reference number format: GF-YYYY-XXXX
-                $reference_no = 'GF-' . date('Y', strtotime($complaint['submitted_at'])) . '-' . str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                // Generate complex reference number format: GFX-YYYYMM-XXXX-HASH
+                $year_month = date('Ym', strtotime($complaint['submitted_at']));
+                $complaint_id_padded = str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                $hash = strtoupper(substr(md5($complaint['id'] . $complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                $reference_no = 'GFX-' . $year_month . '-' . $complaint_id_padded . '-' . $hash;
                 ?>
                 <div class="card">
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -263,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const value = this.value.toUpperCase();
             this.value = value;
             
-            const pattern = /^GF-\d{4}-\d+$/;
+            const pattern = /^GFX-\d{6}-\d+-[A-Z0-9]{4}$/;
             const isValid = pattern.test(value) || value === '';
             
             this.classList.toggle('is-invalid', value !== '' && !isValid);
@@ -272,14 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Format helper
         referenceInput.addEventListener('blur', function() {
-            let value = this.value.toUpperCase().replace(/[^GF0-9-]/g, '');
-            
-            // Auto-format if user enters just numbers
-            if (/^\d+$/.test(value)) {
-                const currentYear = new Date().getFullYear();
-                value = `GF-${currentYear}-${value}`;
-                this.value = value;
-            }
+            let value = this.value.toUpperCase().replace(/[^GFX0-9A-Z-]/g, '');
+            this.value = value;
         });
         
         // Form submission with loading state
@@ -295,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Copy reference number functionality
     const referenceElements = document.querySelectorAll('.text-primary.fw-bold');
     referenceElements.forEach(function(element) {
-        if (element.textContent.startsWith('GF-')) {
+        if (element.textContent.startsWith('GFX-')) {
             element.style.cursor = 'pointer';
             element.title = 'Click to copy reference number';
             

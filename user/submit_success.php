@@ -45,8 +45,11 @@ if (!$complaint) {
                     </div>
                     <div class="card-body">
                         <?php 
-                        // Generate reference number format: GF-YYYY-XXXX
-                        $reference_no = 'GF-' . date('Y', strtotime($complaint['submitted_at'])) . '-' . str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                        // Generate complex reference number format: GFX-YYYYMM-XXXX-HASH
+                        $year_month = date('Ym', strtotime($complaint['submitted_at']));
+                        $complaint_id_padded = str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                        $hash = strtoupper(substr(md5($complaint['id'] . $complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                        $reference_no = 'GFX-' . $year_month . '-' . $complaint_id_padded . '-' . $hash;
                         ?>
                         <div class="row">
                             <div class="col-md-6">
