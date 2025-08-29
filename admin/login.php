@@ -82,19 +82,10 @@ if ($_POST) {
                                     Login
                                 </button>
                             </form>
-
-                            <!-- Demo Credentials -->
-                            <div class="alert alert-info">
-                                <small>
-                                    <strong>Demo Credentials:</strong><br>
-                                    Username: <code>admin</code><br>
-                                    Password: <code>password</code>
-                                </small>
-                            </div>
-
+                            
                             <!-- Back to Home -->
                             <div class="text-center">
-                                <a href="../user/index.php" class="btn btn-outline-secondary btn-sm">
+                                <a href="../user/index.php" class="btn btn-outline-primary btn-sm">
                                     Back to GoodFix
                                 </a>
                             </div>

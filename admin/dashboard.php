@@ -51,10 +51,7 @@ $priority_stats = $stmt->fetchAll();
             </div>
             <div class="text-end">
                 <p class="mb-0 text-muted">
-                    <i class="bi bi-calendar3"></i> <?php echo date('F j, Y'); ?>
-                </p>
-                <p class="mb-0 text-muted">
-                    <i class="bi bi-clock"></i> <?php echo date('g:i A'); ?>
+                    <?php echo date('F j, Y'); ?>
                 </p>
             </div>
         </div>
