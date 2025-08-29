@@ -58,13 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const newStatus = this.value;
             const complaintId = this.form.querySelector('input[name="complaint_id"]').value;
             
-            if (newStatus === 'closed') {
-                if (!confirm('Are you sure you want to close this complaint? This action cannot be easily undone.')) {
-                    // Reset to previous value
-                    this.selectedIndex = 0;
-                    return false;
-                }
-            }
+            
         });
     });
 

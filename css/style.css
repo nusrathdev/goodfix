@@ -47,25 +47,8 @@ body {
     font-size: 12px;
 }
 
-.priority-medium {
-    background-color: #fff3cd;
-    color: #856404;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-}
-
-.priority-high {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-}
-
-.priority-urgent {
-    background-color: var(--danger-color);
-    color: white;
+.type{
+    color: #000000;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;

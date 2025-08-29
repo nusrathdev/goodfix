@@ -76,7 +76,7 @@ $complaints = $stmt->fetchAll();
                 <p class="text-muted mb-0">Manage and track student complaints</p>
             </div>
             <div>
-                <span class="badge bg-primary fs-6"><?php echo $total_complaints; ?> Total</span>
+                <span class="text-black"><?php echo $total_complaints; ?> Total</span>
             </div>
         </div>
 
@@ -106,7 +106,7 @@ $complaints = $stmt->fetchAll();
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-search"></i> Search
                             </button>
-                            <a href="view_complaints.php" class="btn btn-outline-secondary">
+                            <a href="view_complaints.php" class="btn btn-outline-primary">
                                 <i class="bi bi-arrow-clockwise"></i> Reset
                             </a>
                         </div>
@@ -154,7 +154,7 @@ $complaints = $stmt->fetchAll();
                         <tr>
                             <td>
                                 <a href="complaint_detail.php?id=<?php echo $complaint['id']; ?>" class="text-decoration-none fw-bold">
-                                    #<?php echo str_pad($complaint['id'], 4, '0', STR_PAD_LEFT); ?>
+                                    <?php echo $complaint['id']; ?>
                                 </a>
                             </td>
                             <td>
@@ -164,17 +164,17 @@ $complaints = $stmt->fetchAll();
                                 </div>
                             </td>
                             <td>
-                                <span class="text-truncate d-inline-block" style="max-width: 200px;" title="<?php echo htmlspecialchars($complaint['subject']); ?>">
+                                <span class="text-truncate" style="max-width: 200px;" title="<?php echo htmlspecialchars($complaint['subject']); ?>">
                                     <?php echo htmlspecialchars($complaint['subject']); ?>
                                 </span>
                             </td>
                             <td>
-                                <span class="badge bg-secondary">
+                                <span class="type">
                                     <?php echo htmlspecialchars($complaint['complaint_type']); ?>
                                 </span>
                             </td>
                             <td>
-                                <span class="badge priority-<?php echo $complaint['priority']; ?>">
+                                <span class="priority">
                                     <?php echo ucfirst($complaint['priority']); ?>
                                 </span>
                             </td>
