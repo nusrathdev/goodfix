@@ -148,12 +148,9 @@ if ($_POST) {
                                 <button type="submit" class="btn btn-primary">
                                     Submit Complaint
                                 </button>
-                                <a href="index.php" class="btn btn-outline-secondary">
-                                    Back to Home
+                                <a href="index.php" class="btn btn-outline-primary">
+                                    <i class="bi bi-arrow-left"></i> Back
                                 </a>
-                                <button type="button" class="btn btn-outline-warning btn-sm">
-                                    Clear Saved Data
-                                </button>
                             </div>
                         </form>
                     </div>
@@ -238,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add clear data button
     const clearBtn = document.createElement('button');
     clearBtn.type = 'button';
-    clearBtn.className = 'btn btn-outline-warning btn-sm';
+    clearBtn.className = 'btn btn-link btn-sm text-primary ms-auto';
     clearBtn.innerHTML = 'Clear Saved Data';
     clearBtn.onclick = function() {
         if (confirm('Are you sure you want to clear your saved information?')) {
