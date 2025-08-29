@@ -31,8 +31,8 @@ $stmt = $pdo->query("SELECT COUNT(*) as resolved FROM complaints WHERE status = 
 $stats['resolved'] = $stmt->fetch()['resolved'];
 
 // Recent complaints
-$stmt = $pdo->query("SELECT * FROM complaints ORDER BY submitted_at DESC LIMIT 5");
-$recent_complaints = $stmt->fetchAll();
+$stmt = $pdo->query("SELECT * FROM complaints WHERE status = 'pending' ORDER BY submitted_at DESC LIMIT 5");
+$recent_pending_complaints = $stmt->fetchAll();
 
 // Priority distribution
 $stmt = $pdo->query("SELECT priority, COUNT(*) as count FROM complaints GROUP BY priority");
@@ -109,14 +109,14 @@ $priority_stats = $stmt->fetchAll();
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="bi bi-clock-history"></i> Recent Complaints
+                            <i class="bi bi-clock-history"></i> Recent Pending Complaints
                         </h5>
                         <a href="view_complaints.php" class="btn btn-sm btn-primary">
                             <i class="bi bi-eye"></i> View All
                         </a>
                     </div>
                     <div class="card-body">
-                        <?php if (empty($recent_complaints)): ?>
+                        <?php if (empty($recent_pending_complaints)): ?>
                         <div class="text-center text-muted py-4">
                             <i class="bi bi-inbox fs-1"></i>
                             <p class="mt-2">No complaints yet</p>
@@ -135,7 +135,7 @@ $priority_stats = $stmt->fetchAll();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($recent_complaints as $complaint): ?>
+                                    <?php foreach ($recent_pending_complaints as $complaint): ?>
                                     <tr>
                                         <td>
                                             <a href="complaint_detail.php?id=<?php echo $complaint['id']; ?>" class="text-decoration-none">

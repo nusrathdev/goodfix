@@ -58,9 +58,9 @@ include '../includes/header.php';
                             </div>
                             <div class="d-flex gap-3">
                                 <button type="button" class="btn btn-primary" onclick="saveProfile()">
-                                    <i class="bi bi-floppy"></i> Save Information
+                                     Save Information
                                 </button>
-                                <button type="button" class="btn btn-outline-warning" onclick="clearProfile()">
+                                <button type="button" class="btn btn-link text-primary ms-auto" onclick="clearProfile()">
                                     <i class="bi bi-trash"></i> Clear All Data
                                 </button>
                             </div>
@@ -120,7 +120,7 @@ include '../includes/header.php';
 
                 <!-- Back to Home -->
                 <div class="text-center mt-4">
-                    <a href="index.php" class="btn btn-outline-secondary">
+                    <a href="index.php" class="btn btn-outline-primary">
                         <i class="bi bi-arrow-left"></i> Back to Home
                     </a>
                 </div>
