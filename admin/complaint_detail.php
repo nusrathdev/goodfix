@@ -71,7 +71,7 @@ if (!$complaint) {
                 </p>
             </div>
             <div>
-                <a href="view_complaints.php" class="btn btn-outline-secondary">
+                <a href="view_complaints.php" class="btn btn-outline-primary">
                     <i class="bi bi-arrow-left"></i> Back to List
                 </a>
             </div>
@@ -134,7 +134,7 @@ if (!$complaint) {
                                     <tr>
                                         <td class="fw-bold">Type:</td>
                                         <td>
-                                            <span class="badge bg-secondary">
+                                            <span class="type">
                                                 <?php echo htmlspecialchars($complaint['complaint_type']); ?>
                                             </span>
                                         </td>
@@ -142,7 +142,7 @@ if (!$complaint) {
                                     <tr>
                                         <td class="fw-bold">Current Status:</td>
                                         <td>
-                                            <span class="badge status-<?php echo $complaint['status']; ?>">
+                                            <span class="status">
                                                 <?php echo ucfirst(str_replace('_', ' ', $complaint['status'])); ?>
                                             </span>
                                         </td>
@@ -150,7 +150,7 @@ if (!$complaint) {
                                     <tr>
                                         <td class="fw-bold">Priority:</td>
                                         <td>
-                                            <span class="badge priority-<?php echo $complaint['priority']; ?>">
+                                            <span class="priority">
                                                 <?php echo ucfirst($complaint['priority']); ?>
                                             </span>
                                         </td>
@@ -258,7 +258,7 @@ if (!$complaint) {
                                 </select>
                             </div>
                             <button type="submit" name="update_status" class="btn btn-primary w-100">
-                                <i class="bi bi-arrow-repeat"></i> Update Status
+                                Update Status
                             </button>
                         </form>
                     </div>
@@ -282,8 +282,8 @@ if (!$complaint) {
                                     <option value="urgent" <?php echo $complaint['priority'] == 'urgent' ? 'selected' : ''; ?>>Urgent</option>
                                 </select>
                             </div>
-                            <button type="submit" name="update_priority" class="btn btn-warning w-100">
-                                <i class="bi bi-flag"></i> Update Priority
+                            <button type="submit" name="update_priority" class="btn btn-primary w-100">
+                               Update Priority
                             </button>
                         </form>
                     </div>

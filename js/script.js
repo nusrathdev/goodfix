@@ -88,25 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.backgroundColor = '';
         });
     });
-
-    // Loading states for forms
-    const submitButtons = document.querySelectorAll('button[type="submit"]');
-    submitButtons.forEach(function(button) {
-        const form = button.closest('form');
-        if (form) {
-            form.addEventListener('submit', function() {
-                button.disabled = true;
-                const originalText = button.innerHTML;
-                button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
-                
-                // Re-enable after 5 seconds as fallback
-                setTimeout(function() {
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                }, 5000);
-            });
-        }
-    });
 });
 
 // Utility functions
