@@ -20,9 +20,9 @@ include '../includes/header.php';
                     </p>
                     <div class="d-flex gap-3 justify-content-center">
                         <a href="submit_complaint.php" class="btn btn-light btn-lg">
-                            <i class="bi bi-plus-circle me-2"></i>Submit Complaint
+                            </i>Submit Complaint
                         </a>
-                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg">
+                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg border-white">
                             Track Complaint
                         </a>
                     </div>
@@ -49,7 +49,7 @@ include '../includes/header.php';
                     <div class="card h-100 text-center">
                         <div class="card-body">
                             <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                <i class="bi bi-plus-circle fs-4"></i>
+                                <strong>1</strong>
                             </div>
                             <h5 class="card-title">Submit Complaint</h5>
                             <p class="card-text">Fill out a simple form with details about your issue. You'll receive a secure reference number for tracking.</p>
@@ -60,7 +60,7 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>2</strong>
                             </div>
                             <h5 class="card-title">We Process</h5>
@@ -72,7 +72,7 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>3</strong>
                             </div>
                             <h5 class="card-title">Get Resolution</h5>
@@ -122,12 +122,12 @@ include '../includes/header.php';
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <a href="submit_complaint.php" class="btn btn-primary btn-lg w-100">
-                                <i class="bi bi-plus-circle me-2"></i>Submit New Complaint
+                                Submit New Complaint
                             </a>
                         </div>
                         <div class="col-sm-6">
                             <a href="track_complaint.php" class="btn btn-outline-primary btn-lg w-100">
-                                <i class="bi bi-search me-2"></i>Track with Reference
+                                Track with Reference
                             </a>
                         </div>
                     </div>
