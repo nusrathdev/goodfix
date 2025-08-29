@@ -64,7 +64,6 @@ $priority_stats = $stmt->fetchAll();
             <div class="col-md-3">
                 <div class="card stat-card">
                     <div class="card-body text-center">
-                        <i class="bi bi-file-earmark-text text-primary fs-1 mb-3"></i>
                         <h3 class="fw-bold"><?php echo $stats['total']; ?></h3>
                         <p class="text-muted mb-0">Total Complaints</p>
                     </div>
@@ -72,9 +71,8 @@ $priority_stats = $stmt->fetchAll();
             </div>
             
             <div class="col-md-3">
-                <div class="card stat-card pending">
+                <div class="card stat-card">
                     <div class="card-body text-center">
-                        <i class="bi bi-clock text-warning fs-1 mb-3"></i>
                         <h3 class="fw-bold"><?php echo $stats['pending']; ?></h3>
                         <p class="text-muted mb-0">Pending</p>
                     </div>
@@ -82,9 +80,8 @@ $priority_stats = $stmt->fetchAll();
             </div>
             
             <div class="col-md-3">
-                <div class="card stat-card in-progress">
+                <div class="card stat-card">
                     <div class="card-body text-center">
-                        <i class="bi bi-gear text-primary fs-1 mb-3"></i>
                         <h3 class="fw-bold"><?php echo $stats['in_progress']; ?></h3>
                         <p class="text-muted mb-0">In Progress</p>
                     </div>
@@ -92,9 +89,8 @@ $priority_stats = $stmt->fetchAll();
             </div>
             
             <div class="col-md-3">
-                <div class="card stat-card resolved">
+                <div class="card stat-card">
                     <div class="card-body text-center">
-                        <i class="bi bi-check-circle text-success fs-1 mb-3"></i>
                         <h3 class="fw-bold"><?php echo $stats['resolved']; ?></h3>
                         <p class="text-muted mb-0">Resolved</p>
                     </div>
