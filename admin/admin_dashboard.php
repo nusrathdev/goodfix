@@ -2,7 +2,7 @@
 $page_title = "Admin Dashboard";
 $css_path = "../css/style.css";
 $js_path = "../js/script.js";
-$home_path = "../user/index.php";
+$home_path = "../user/dashboard.php";
 $show_admin_nav = true;
 include '../includes/header.php';
 include '../includes/db.php';

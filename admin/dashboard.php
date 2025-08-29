@@ -2,7 +2,7 @@
 $page_title = "Admin Dashboard";
 $css_path = "../css/style.css";
 $js_path = "../js/script.js";
-$home_path = "../user/index.php";
+$home_path = "../admin/dashboard.php";
 $show_admin_nav = true;
 include '../includes/header.php';
 include '../includes/db.php';
@@ -115,7 +115,7 @@ $priority_stats = $stmt->fetchAll();
                         <?php if (empty($recent_pending_complaints)): ?>
                         <div class="text-center text-muted py-4">
                             <i class="bi bi-inbox fs-1"></i>
-                            <p class="mt-2">No complaints yet</p>
+                            <p class="mt-2">No pending complaints yet</p>
                         </div>
                         <?php else: ?>
                         <div class="table-responsive">
