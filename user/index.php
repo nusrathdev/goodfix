@@ -20,9 +20,9 @@ include '../includes/header.php';
                     </p>
                     <div class="d-flex gap-3 justify-content-center">
                         <a href="submit_complaint.php" class="btn btn-light btn-lg">
-                            Submit Complaint
+                            <i class="bi bi-plus-circle me-2"></i>Submit Complaint
                         </a>
-                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg border-white">
+                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg">
                             Track Complaint
                         </a>
                     </div>
@@ -48,11 +48,11 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
-                                <strong>1</strong>
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-plus-circle fs-4"></i>
                             </div>
                             <h5 class="card-title">Submit Complaint</h5>
-                            <p class="card-text">Fill out a simple form with details about your issue or concern.</p>
+                            <p class="card-text">Fill out a simple form with details about your issue. You'll receive a secure reference number for tracking.</p>
                         </div>
                     </div>
                 </div>
@@ -60,11 +60,11 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>2</strong>
                             </div>
                             <h5 class="card-title">We Process</h5>
-                            <p class="card-text">Our team reviews and assigns your complaint to the right department.</p>
+                            <p class="card-text">Our team reviews and assigns your complaint to the right department for prompt resolution.</p>
                         </div>
                     </div>
                 </div>
@@ -72,11 +72,11 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>3</strong>
                             </div>
                             <h5 class="card-title">Get Resolution</h5>
-                            <p class="card-text">Track progress and receive updates until your issue is resolved.</p>
+                            <p class="card-text">Track progress with your secure reference number and receive updates until your issue is fully resolved.</p>
                         </div>
                     </div>
                 </div>
@@ -88,36 +88,69 @@ include '../includes/header.php';
     <section class="bg-light py-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <h3 class="fw-bold mb-4">Need Help Right Now?</h3>
+                <div class="col-md-10 text-center">
+                    <h3 class="fw-bold mb-4">Ready to Get Started?</h3>
                     
-                    <!-- My Complaints Quick Access (Hidden by default) -->
-                    <div id="myComplaintsQuick" class="card mb-4" style="display: none;">
-                        <div class="card-header bg-success text-white">
-                            <h6 class="mb-0">
-                                <i class="bi bi-bookmark-heart"></i> Your Recent Complaints
-                            </h6>
-                        </div>
-                        <div class="card-body" id="quickComplaintsList">
-                            <!-- Populated by JavaScript -->
+                    <!-- Quick Track Section -->
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-2">
+                                        <i class="bi bi-search text-primary me-2"></i>Track Existing Complaint
+                                    </h5>
+                                    <p class="text-muted mb-3">Already have a reference number? Enter it below to check your complaint status instantly.</p>
+                                    <form method="POST" action="track_complaint.php" class="d-flex gap-2">
+                                        <input type="text" name="reference_no" class="form-control" 
+                                               placeholder="Enter reference (e.g., GFX-202508-1234-A7B9)" 
+                                               pattern="^GFX-\d{6}-\d+-[A-Z0-9]{4}$"
+                                               required>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="bi bi-search"></i> Track
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="text-primary">
+                                        <i class="bi bi-shield-check" style="font-size: 4rem; opacity: 0.3;"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <a href="submit_complaint.php" class="btn btn-primary btn-lg w-100">
-                                Submit New Complaint
+                                <i class="bi bi-plus-circle me-2"></i>Submit New Complaint
                             </a>
                         </div>
                         <div class="col-sm-6">
                             <a href="track_complaint.php" class="btn btn-outline-primary btn-lg w-100">
-                                Track Your Complaint
+                                <i class="bi bi-search me-2"></i>Track with Reference
                             </a>
                         </div>
                     </div>
-                    <p class="text-muted mt-3">
-                        <small>Having trouble? Contact support at support@university.edu</small>
-                    </p>
+                    
+                    <!-- Important Information -->
+                    <div class="mt-4 p-3 bg-white rounded border-start border-4 border-primary">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 text-start">
+                                <h6 class="text-primary mb-1">
+                                    <i class="bi bi-info-circle me-2"></i>Important Information
+                                </h6>
+                                <p class="mb-0 small text-muted">
+                                    Keep your reference number safe - it's the only way to track your complaint. 
+                                    Reference numbers are secure and unique to prevent unauthorized access.
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <small class="text-muted">
+                                    Need help? <a href="mailto:support@university.edu" class="text-decoration-none">Contact Support</a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,61 +160,21 @@ include '../includes/header.php';
 <!-- Home Page Scripts -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Check for saved complaints and show quick access
-    const savedComplaints = localStorage.getItem('goodfix_my_complaints');
-    if (savedComplaints) {
-        const complaints = JSON.parse(savedComplaints);
-        if (complaints.length > 0) {
-            showQuickComplaints(complaints.slice(0, 3)); // Show only first 3
-        }
-    }
+    // Initialize page interactions
+    console.log('GoodFix System - Secure Complaint Management');
     
-    function showQuickComplaints(complaints) {
-        const quickCard = document.getElementById('myComplaintsQuick');
-        const quickList = document.getElementById('quickComplaintsList');
-        
-        let html = '<div class="row g-2">';
-        complaints.forEach(function(complaint) {
-            const statusColor = getStatusColor(complaint.status);
-            html += `
-                <div class="col-md-4">
-                    <div class="card card-body text-center h-100">
-                        <h6 class="mb-1">
-                            <a href="track_complaint.php?id=${complaint.id}" class="text-decoration-none">
-                                #${String(complaint.id).padStart(4, '0')}
-                            </a>
-                        </h6>
-                        <p class="small text-truncate mb-2" title="${complaint.subject}">
-                            ${complaint.subject}
-                        </p>
-                        <span class="badge bg-${statusColor}">${complaint.status}</span>
-                    </div>
-                </div>
-            `;
-        });
-        html += '</div>';
-        
-        if (complaints.length > 0) {
-            html += `
-                <div class="text-center mt-3">
-                    <a href="track_complaint.php" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-eye"></i> View All My Complaints
-                    </a>
-                </div>
-            `;
-        }
-        
-        quickList.innerHTML = html;
-        quickCard.style.display = 'block';
-    }
-    
-    function getStatusColor(status) {
-        switch(status) {
-            case 'pending': return 'warning';
-            case 'in_progress': return 'primary';
-            case 'resolved': return 'success';
-            case 'closed': return 'secondary';
-            default: return 'secondary';
+    // Track button focus enhancement
+    const trackForm = document.querySelector('#quickTrackingForm');
+    if (trackForm) {
+        const refInput = trackForm.querySelector('input[name="reference"]');
+        if (refInput) {
+            refInput.addEventListener('focus', function() {
+                this.placeholder = 'Example: GFX-202501-123-AB7D';
+            });
+            
+            refInput.addEventListener('blur', function() {
+                this.placeholder = 'Enter your complaint reference number...';
+            });
         }
     }
 });

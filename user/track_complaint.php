@@ -23,28 +23,37 @@ if (isset($_GET['id'])) {
 }
 
 // Handle search form
-if ($_POST && isset($_POST['search_type'])) {
-    $search_type = $_POST['search_type'];
-    $search_value = trim($_POST['search_value']);
+if ($_POST && isset($_POST['reference_no'])) {
+    $reference_no = trim($_POST['reference_no']);
     
-    if (empty($search_value)) {
-        $error_message = "Please enter a search value.";
+    if (empty($reference_no)) {
+        $error_message = "Please enter a reference number.";
     } else {
-        if ($search_type == 'id') {
+        // Extract the complaint ID from the reference number
+        // Reference format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)
+        if (preg_match('/^GFX-\d{6}-(\d+)-[A-Z0-9]{4}$/', $reference_no, $matches)) {
+            $complaint_id = (int)$matches[1];
+            
+            // Verify the hash matches
             $stmt = $pdo->prepare("SELECT * FROM complaints WHERE id = ?");
-            $stmt->execute([(int)$search_value]);
-        } elseif ($search_type == 'email') {
-            $stmt = $pdo->prepare("SELECT * FROM complaints WHERE email = ? ORDER BY submitted_at DESC LIMIT 1");
-            $stmt->execute([$search_value]);
-        } elseif ($search_type == 'student_id') {
-            $stmt = $pdo->prepare("SELECT * FROM complaints WHERE student_id = ? ORDER BY submitted_at DESC LIMIT 1");
-            $stmt->execute([$search_value]);
-        }
-        
-        $complaint = $stmt->fetch();
-        
-        if (!$complaint) {
-            $error_message = "No complaint found with the provided information.";
+            $stmt->execute([$complaint_id]);
+            $temp_complaint = $stmt->fetch();
+            
+            if ($temp_complaint) {
+                // Generate expected hash for verification
+                $expected_hash = strtoupper(substr(md5($temp_complaint['id'] . $temp_complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                $provided_hash = substr($reference_no, -4);
+                
+                if ($expected_hash === $provided_hash) {
+                    $complaint = $temp_complaint;
+                } else {
+                    $error_message = "Invalid reference number: " . htmlspecialchars($reference_no);
+                }
+            } else {
+                $error_message = "No complaint found with reference number: " . htmlspecialchars($reference_no);
+            }
+        } else {
+            $error_message = "Invalid reference number format. Please use format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)";
         }
     }
 }
@@ -59,50 +68,50 @@ if ($_POST && isset($_POST['search_type'])) {
                     <h1 class="fw-bold">
                         <i class="bi bi-search text-primary"></i> Track Your Complaint
                     </h1>
-                    <p class="lead text-muted">Enter your complaint details to check status and updates</p>
-                </div>
-
-                <!-- My Complaints from Browser Cache -->
-                <div class="card mb-4" id="myComplaintsCard" style="display: none;">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">
-                            <i class="bi bi-bookmark-heart"></i> My Recent Complaints
-                            <small class="float-end">Saved in your browser</small>
-                        </h5>
-                    </div>
-                    <div class="card-body" id="myComplaintsList">
-                        <!-- Will be populated by JavaScript -->
-                    </div>
+                    <p class="lead text-muted">Enter your complaint reference number to check status and updates</p>
                 </div>
 
                 <!-- Search Form -->
                 <?php if (!$complaint): ?>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h5 class="mb-0">Find Your Complaint</h5>
+                        <h5 class="mb-0">
+                            <i class="bi bi-hash text-primary"></i> Find Your Complaint
+                        </h5>
+                        <p class="mb-0 text-muted small mt-1">Use the reference number provided when you submitted your complaint</p>
                     </div>
                     <div class="card-body">
                         <form method="POST">
                             <div class="mb-3">
-                                <label for="search_type" class="form-label">Search By:</label>
-                                <select class="form-select" id="search_type" name="search_type" required>
-                                    <option value="id" <?php echo (isset($_POST['search_type']) && $_POST['search_type'] == 'id') ? 'selected' : ''; ?>>Complaint ID</option>
-                                    <option value="email" <?php echo (isset($_POST['search_type']) && $_POST['search_type'] == 'email') ? 'selected' : ''; ?>>Email Address</option>
-                                    <option value="student_id" <?php echo (isset($_POST['search_type']) && $_POST['search_type'] == 'student_id') ? 'selected' : ''; ?>>Student ID</option>
-                                </select>
+                                <label for="reference_no" class="form-label fw-semibold">Complaint Reference Number</label>
+                                <input type="text" class="form-control form-control-lg" id="reference_no" name="reference_no" 
+                                       placeholder="e.g., GFX-202508-1234-A7B9"
+                                       pattern="^GFX-\d{6}-\d+-[A-Z0-9]{4}$"
+                                       title="Reference format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)"
+                                       value="<?php echo isset($_POST['reference_no']) ? htmlspecialchars($_POST['reference_no']) : ''; ?>" 
+                                       required>
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle text-primary"></i> 
+                                    Reference number format: <strong>GFX-YYYYMM-XXXX-HASH</strong> (Example: GFX-202508-1234-A7B9)
+                                </div>
                             </div>
                             
-                            <div class="mb-3">
-                                <label for="search_value" class="form-label">Enter Value:</label>
-                                <input type="text" class="form-control" id="search_value" name="search_value" 
-                                       placeholder="Enter your complaint ID, email, or student ID"
-                                       value="<?php echo isset($_POST['search_value']) ? htmlspecialchars($_POST['search_value']) : ''; ?>" required>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-search"></i> Search Complaint
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-search me-2"></i>Track Complaint
                             </button>
                         </form>
+                        
+                        <!-- Help Section -->
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <h6 class="text-primary mb-2">
+                                <i class="bi bi-question-circle me-1"></i>Can't find your reference number?
+                            </h6>
+                            <ul class="small text-muted mb-0">
+                                <li>Check your email for the confirmation message</li>
+                                <li>Look for the reference number in your submission receipt</li>
+                                <li>Contact support at <a href="mailto:support@university.edu">support@university.edu</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -117,10 +126,17 @@ if ($_POST && isset($_POST['search_type'])) {
 
                 <!-- Complaint Details -->
                 <?php if ($complaint): ?>
+                <?php 
+                // Generate complex reference number format: GFX-YYYYMM-XXXX-HASH
+                $year_month = date('Ym', strtotime($complaint['submitted_at']));
+                $complaint_id_padded = str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
+                $hash = strtoupper(substr(md5($complaint['id'] . $complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
+                $reference_no = 'GFX-' . $year_month . '-' . $complaint_id_padded . '-' . $hash;
+                ?>
                 <div class="card">
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="bi bi-file-earmark-text"></i> Complaint #<?php echo str_pad($complaint['id'], 4, '0', STR_PAD_LEFT); ?>
+                            <i class="bi bi-file-earmark-text"></i> Reference: <?php echo $reference_no; ?>
                         </h5>
                         <span class="badge status-<?php echo $complaint['status']; ?>">
                             <?php echo ucfirst(str_replace('_', ' ', $complaint['status'])); ?>
@@ -137,6 +153,7 @@ if ($_POST && isset($_POST['search_type'])) {
                             </div>
                             <div class="col-md-6">
                                 <h6 class="fw-bold">Complaint Details:</h6>
+                                <p><strong>Reference:</strong> <span class="text-primary fw-bold"><?php echo $reference_no; ?></span></p>
                                 <p><strong>Type:</strong> <?php echo htmlspecialchars($complaint['complaint_type']); ?></p>
                                 <p><strong>Priority:</strong> 
                                     <span class="badge priority-<?php echo $complaint['priority']; ?>">
@@ -247,134 +264,65 @@ if ($_POST && isset($_POST['search_type'])) {
 }
 </style>
 
-<!-- JavaScript for My Complaints -->
+<!-- Simplified JavaScript without browser save system -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const myComplaintsCard = document.getElementById('myComplaintsCard');
-    const myComplaintsList = document.getElementById('myComplaintsList');
+    // Enhanced form validation
+    const form = document.querySelector('form');
+    const referenceInput = document.getElementById('reference_no');
     
-    // Load saved complaints from localStorage
-    function loadMyComplaints() {
-        const savedComplaints = localStorage.getItem('goodfix_my_complaints');
-        if (savedComplaints) {
-            const complaints = JSON.parse(savedComplaints);
-            if (complaints.length > 0) {
-                myComplaintsCard.style.display = 'block';
-                displayComplaints(complaints);
-            }
-        }
-    }
-    
-    // Display complaints in the card
-    function displayComplaints(complaints) {
-        let html = '<div class="row g-3">';
-        
-        complaints.forEach(function(complaint, index) {
-            const statusColor = getStatusColor(complaint.status);
-            const priorityColor = getPriorityColor(complaint.priority);
-            const date = new Date(complaint.submitted_at).toLocaleDateString();
+    if (form && referenceInput) {
+        // Real-time validation
+        referenceInput.addEventListener('input', function() {
+            const value = this.value.toUpperCase();
+            this.value = value;
             
-            html += `
-                <div class="col-md-6">
-                    <div class="card h-100 border-start border-3 border-${statusColor}">
-                        <div class="card-body">
-                            <h6 class="card-title">
-                                <a href="track_complaint.php?id=${complaint.id}" class="text-decoration-none">
-                                    #${String(complaint.id).padStart(4, '0')}
-                                </a>
-                                <span class="badge bg-${statusColor} float-end">${complaint.status}</span>
-                            </h6>
-                            <p class="card-text text-truncate" title="${complaint.subject}">
-                                ${complaint.subject}
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar3"></i> ${date}
-                                </small>
-                                <span class="badge priority-${complaint.priority}">${complaint.priority}</span>
-                            </div>
-                            <div class="mt-2">
-                                <a href="track_complaint.php?id=${complaint.id}" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> Track
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            const pattern = /^GFX-\d{6}-\d+-[A-Z0-9]{4}$/;
+            const isValid = pattern.test(value) || value === '';
+            
+            this.classList.toggle('is-invalid', value !== '' && !isValid);
+            this.classList.toggle('is-valid', isValid && value !== '');
         });
         
-        html += '</div>';
+        // Format helper
+        referenceInput.addEventListener('blur', function() {
+            let value = this.value.toUpperCase().replace(/[^GFX0-9A-Z-]/g, '');
+            this.value = value;
+        });
         
-        // Add clear all button
-        html += `
-            <div class="text-center mt-3">
-                <button class="btn btn-outline-danger btn-sm" onclick="clearMyComplaints()">
-                    <i class="bi bi-trash"></i> Clear All Saved Complaints
-                </button>
-            </div>
-        `;
-        
-        myComplaintsList.innerHTML = html;
-    }
-    
-    // Helper function to get status color
-    function getStatusColor(status) {
-        switch(status) {
-            case 'pending': return 'warning';
-            case 'in_progress': return 'primary';
-            case 'resolved': return 'success';
-            case 'closed': return 'secondary';
-            default: return 'secondary';
-        }
-    }
-    
-    // Helper function to get priority color
-    function getPriorityColor(priority) {
-        switch(priority) {
-            case 'low': return 'success';
-            case 'medium': return 'warning';
-            case 'high': return 'danger';
-            case 'urgent': return 'danger';
-            default: return 'secondary';
-        }
-    }
-    
-    // Clear all saved complaints
-    window.clearMyComplaints = function() {
-        if (confirm('Are you sure you want to clear all saved complaints from your browser?')) {
-            localStorage.removeItem('goodfix_my_complaints');
-            myComplaintsCard.style.display = 'none';
-            
-            // Show success message
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'alert alert-success alert-dismissible fade show';
-            alertDiv.innerHTML = `
-                <i class="bi bi-check-circle"></i> All saved complaints have been cleared.
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            document.querySelector('.container').insertBefore(alertDiv, document.querySelector('.container').firstChild);
-        }
-    };
-    
-    // Auto-fill form with saved user data
-    function autoFillForm() {
-        const savedData = localStorage.getItem('goodfix_user_data');
-        if (savedData) {
-            const userData = JSON.parse(savedData);
-            
-            // Auto-select email if available
-            if (userData.email && document.getElementById('search_type')) {
-                document.getElementById('search_type').value = 'email';
-                document.getElementById('search_value').value = userData.email;
-                document.getElementById('search_value').placeholder = 'Your saved email: ' + userData.email;
+        // Form submission with loading state
+        form.addEventListener('submit', function() {
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Searching...';
+                submitBtn.disabled = true;
             }
-        }
+        });
     }
     
-    // Load complaints and auto-fill on page load
-    loadMyComplaints();
-    autoFillForm();
+    // Copy reference number functionality
+    const referenceElements = document.querySelectorAll('.text-primary.fw-bold');
+    referenceElements.forEach(function(element) {
+        if (element.textContent.startsWith('GFX-')) {
+            element.style.cursor = 'pointer';
+            element.title = 'Click to copy reference number';
+            
+            element.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(function() {
+                    // Show copied notification
+                    const originalText = element.textContent;
+                    element.textContent = 'Copied!';
+                    element.classList.add('text-success');
+                    
+                    setTimeout(function() {
+                        element.textContent = originalText;
+                        element.classList.remove('text-success');
+                        element.classList.add('text-primary');
+                    }, 1500);
+                });
+            });
+        }
+    });
 });
 </script>
 
