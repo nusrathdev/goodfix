@@ -220,9 +220,13 @@ ini_set('display_errors', 1);
 This project GoodFix - Complaint Management System is developed by
 
 P. Pirathiska (UWU/ICT/23/095)
+
 ULF. Sayila (UWU/ICT/23/093)
+
 MAM. Ashfak (UWU/ICT/23/027)
+
 MJM. Mafahir (UWU/ICT/23/092)
+
 MHM. Nusrath (UWU/ICT/23/090)
 
 © 2025. All rights reserved.
