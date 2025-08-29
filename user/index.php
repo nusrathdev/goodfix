@@ -18,11 +18,11 @@ include '../includes/header.php';
                     <p class="lead mb-4">
                         Your university complaint management system. Submit issues, track progress, and help make our campus better.
                     </p>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex gap-3 justify-content-center">
                         <a href="submit_complaint.php" class="btn btn-light btn-lg">
                             Submit Complaint
                         </a>
-                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg">
+                        <a href="track_complaint.php" class="btn btn-outline-light btn-lg border-white">
                             Track Complaint
                         </a>
                     </div>
@@ -60,7 +60,7 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-warning text-dark rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>2</strong>
                             </div>
                             <h5 class="card-title">We Process</h5>
@@ -72,7 +72,7 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>3</strong>
                             </div>
                             <h5 class="card-title">Get Resolution</h5>
