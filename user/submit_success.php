@@ -65,8 +65,8 @@ if (!$complaint) {
                                 <h6 class="fw-bold">Student Name:</h6>
                                 <p><?php echo htmlspecialchars($complaint['student_name']); ?></p>
                                 
-                                <h6 class="fw-bold">Department:</h6>
-                                <p><?php echo htmlspecialchars($complaint['department'] ?: 'Not specified'); ?></p>
+                                <h6 class="fw-bold">Faculty:</h6>
+                                <p><?php echo htmlspecialchars($complaint['faculty'] ?: 'Not specified'); ?></p>
                             </div>
                             <div class="col-md-6">
                                 <h6 class="fw-bold">Status:</h6>

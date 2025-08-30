@@ -121,7 +121,7 @@ Password: password
 - `student_name` (VARCHAR 100)
 - `student_id` (VARCHAR 20)
 - `email` (VARCHAR 100)
-- `department` (VARCHAR 50)
+- `faculty` (VARCHAR 50)
 - `complaint_type` (VARCHAR 50)
 - `subject` (VARCHAR 200)
 - `description` (TEXT)
@@ -137,10 +137,10 @@ Password: password
 - Uses CSS custom properties for easy theme customization
 - Bootstrap 5 classes for responsive design
 
-### Adding New Departments
-Edit the department dropdown in `user/submit_complaint.php`:
+### Adding New Facultys
+Edit the faculty dropdown in `user/submit_complaint.php`:
 ```php
-<option value="New Department">New Department</option>
+<option value="New Faculty">New Faculty</option>
 ```
 
 ### Adding New Complaint Types

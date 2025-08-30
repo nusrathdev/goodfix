@@ -116,8 +116,8 @@ if (!$complaint) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Department:</td>
-                                        <td><?php echo htmlspecialchars($complaint['department'] ?: 'Not specified'); ?></td>
+                                        <td class="fw-bold">Faculty:</td>
+                                        <td><?php echo htmlspecialchars($complaint['faculty'] ?: 'Not specified'); ?></td>
                                     </tr>
                                 </table>
                             </div>

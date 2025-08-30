@@ -44,9 +44,9 @@ include '../includes/header.php';
                                     <input type="email" class="form-control" id="email" placeholder="Enter your email">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="department" class="form-label">Department</label>
-                                    <select class="form-select" id="department">
-                                        <option value="">Select Department</option>
+                                    <label for="faculty" class="form-label">Faculty</label>
+                                    <select class="form-select" id="faculty">
+                                        <option value="">Select Faculty</option>
                                         <option value="Computer Science">Computer Science</option>
                                         <option value="Engineering">Engineering</option>
                                         <option value="Business">Business</option>
@@ -145,7 +145,7 @@ function loadProfile() {
         document.getElementById('student_name').value = userData.student_name || '';
         document.getElementById('student_id').value = userData.student_id || '';
         document.getElementById('email').value = userData.email || '';
-        document.getElementById('department').value = userData.department || '';
+        document.getElementById('faculty').value = userData.faculty || '';
     }
 }
 
@@ -154,7 +154,7 @@ function saveProfile() {
         student_name: document.getElementById('student_name').value.trim(),
         student_id: document.getElementById('student_id').value.trim(),
         email: document.getElementById('email').value.trim(),
-        department: document.getElementById('department').value,
+        faculty: document.getElementById('faculty').value,
         last_updated: new Date().toISOString()
     };
     

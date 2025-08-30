@@ -17,7 +17,7 @@ CREATE TABLE complaints (
     student_name VARCHAR(100) NOT NULL,
     student_id VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    department VARCHAR(50) NOT NULL,
+    faculty VARCHAR(50) NOT NULL,
     complaint_type VARCHAR(50) NOT NULL,
     subject VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
@@ -32,6 +32,6 @@ INSERT INTO admins (username, password) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'); -- password: password
 
 -- for testing
-INSERT INTO complaints (student_name, student_id, email, department, complaint_type, subject, description) VALUES 
+INSERT INTO complaints (student_name, student_id, email, faculty, complaint_type, subject, description) VALUES 
 ('John Doe', 'ST001', 'john@university.edu', 'Computer Science', 'Academic', 'Lab Equipment Issue', 'The computers in Lab 101 are not working properly'),
 ('Jane Smith', 'ST002', 'jane@university.edu', 'Engineering', 'Facility', 'Broken Chair', 'Chair in classroom 205 is broken and needs replacement');

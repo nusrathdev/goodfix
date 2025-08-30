@@ -149,7 +149,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                                 <p><strong>Name:</strong> <?php echo htmlspecialchars($complaint['student_name']); ?></p>
                                 <p><strong>ID:</strong> <?php echo htmlspecialchars($complaint['student_id']); ?></p>
                                 <p><strong>Email:</strong> <?php echo htmlspecialchars($complaint['email']); ?></p>
-                                <p><strong>Department:</strong> <?php echo htmlspecialchars($complaint['department'] ?: 'Not specified'); ?></p>
+                                <p><strong>Faculty:</strong> <?php echo htmlspecialchars($complaint['faculty'] ?: 'Not specified'); ?></p>
                             </div>
                             <div class="col-md-6">
                                 <h6 class="fw-bold">Complaint Details:</h6>

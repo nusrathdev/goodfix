@@ -14,7 +14,7 @@ if ($_POST) {
     $student_name = trim($_POST['student_name']);
     $student_id = trim($_POST['student_id']);
     $email = trim($_POST['email']);
-    $department = $_POST['department'];
+    $faculty = $_POST['faculty'];
     $complaint_type = $_POST['complaint_type'];
     $subject = trim($_POST['subject']);
     $description = trim($_POST['description']);
@@ -28,8 +28,8 @@ if ($_POST) {
     } else {
         try {
             // Insert complaint into database
-            $stmt = $pdo->prepare("INSERT INTO complaints (student_name, student_id, email, department, complaint_type, subject, description, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$student_name, $student_id, $email, $department, $complaint_type, $subject, $description, $priority]);
+            $stmt = $pdo->prepare("INSERT INTO complaints (student_name, student_id, email, faculty, complaint_type, subject, description, priority) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$student_name, $student_id, $email, $faculty, $complaint_type, $subject, $description, $priority]);
             
             $complaint_id = $pdo->lastInsertId();
             
@@ -92,15 +92,15 @@ if ($_POST) {
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label for="department" class="form-label">Department</label>
-                                    <select class="form-select" id="department" name="department">
-                                        <option value="">Select Department</option>
-                                        <option value="Computer Science" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Computer Science') ? 'selected' : ''; ?>>Computer Science</option>
-                                        <option value="Engineering" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Engineering') ? 'selected' : ''; ?>>Engineering</option>
-                                        <option value="Business" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Business') ? 'selected' : ''; ?>>Business</option>
-                                        <option value="Arts" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
-                                        <option value="Science" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Science') ? 'selected' : ''; ?>>Science</option>
-                                        <option value="Other" <?php echo (isset($_POST['department']) && $_POST['department'] == 'Other') ? 'selected' : ''; ?>>Other</option>
+                                    <label for="faculty" class="form-label">Faculty</label>
+                                    <select class="form-select" id="faculty" name="faculty">
+                                        <option value="">Select Faculty</option>
+                                        <option value="Computer Science" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Computer Science') ? 'selected' : ''; ?>>Computer Science</option>
+                                        <option value="Engineering" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Engineering') ? 'selected' : ''; ?>>Engineering</option>
+                                        <option value="Business" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Business') ? 'selected' : ''; ?>>Business</option>
+                                        <option value="Arts" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
+                                        <option value="Science" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Science') ? 'selected' : ''; ?>>Science</option>
+                                        <option value="Other" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Other') ? 'selected' : ''; ?>>Other</option>
                                     </select>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userData.student_name) document.getElementById('student_name').value = userData.student_name;
             if (userData.student_id) document.getElementById('student_id').value = userData.student_id;
             if (userData.email) document.getElementById('email').value = userData.email;
-            if (userData.department) document.getElementById('department').value = userData.department;
+            if (userData.faculty) document.getElementById('faculty').value = userData.faculty;
         }
     }
     
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             student_name: document.getElementById('student_name').value,
             student_id: document.getElementById('student_id').value,
             email: document.getElementById('email').value,
-            department: document.getElementById('department').value,
+            faculty: document.getElementById('faculty').value,
             last_updated: new Date().toISOString()
         };
         
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Save data when form fields change
-    ['student_name', 'student_id', 'email', 'department'].forEach(fieldId => {
+    ['student_name', 'student_id', 'email', 'faculty'].forEach(fieldId => {
         const field = document.getElementById(fieldId);
         field.addEventListener('blur', saveUserData);
     });

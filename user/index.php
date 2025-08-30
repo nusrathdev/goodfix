@@ -64,7 +64,7 @@ include '../includes/header.php';
                                 <strong>2</strong>
                             </div>
                             <h5 class="card-title">We Process</h5>
-                            <p class="card-text">Our team reviews and assigns your complaint to the right department for prompt resolution.</p>
+                            <p class="card-text">Our team reviews and assigns your complaint to the right faculty for prompt resolution.</p>
                         </div>
                     </div>
                 </div>
