@@ -96,8 +96,8 @@ chmod -R 755 web_devproject/
 ```
 
 ### Step 5: Access the Application
-- **Student Portal**: `http://our-domain/user/index.php`
-- **Admin Panel**: `http://your-domain/admin/login.php`
+- **Student Portal**: `http://userdomain/user/index.php`
+- **Admin Panel**: `http://admindomain/admin/login.php`
 
 ## 🔐 Default Admin Credentials
 
@@ -217,7 +217,22 @@ ini_set('display_errors', 1);
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project GoodFix - Complaint Management System is developed by
+
+P. Pirathiska (UWU/ICT/23/095)
+
+ULF. Sayila (UWU/ICT/23/093)
+
+MAM. Ashfak (UWU/ICT/23/027)
+
+MJM. Mafahir (UWU/ICT/23/092)
+
+MHM. Nusrath (UWU/ICT/23/090)
+
+© 2025. All rights reserved.
+
+This project is intended for academic purposes at Uva Wellassa University of Sri Lanka.
+Unauthorized copying, modification, or distribution of this work, in whole or in part, is strictly prohibited without prior permission from the authors.
 
 ---
 
