@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand fw-bold" href="<?php echo isset($home_path) ? $home_path : '../user/index.php'; ?>">
-                GoodFix
+                <img src="../assets/cms-logo.png" alt="GoodFix Logo" style="width: 150px; height: 150px; margin-bottom: -50px; margin-top: -50px;" class="me-2">
             </a>
             
             <?php if (isset($show_admin_nav) && $show_admin_nav): ?>
