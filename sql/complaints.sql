@@ -33,5 +33,5 @@ INSERT INTO admins (username, password) VALUES
 
 -- for testing
 INSERT INTO complaints (student_name, student_id, email, faculty, complaint_type, subject, description) VALUES 
-('Mohamed Nusrath', 'ict23090', 'ict23090@std.uwu.ac.lk', 'Technological Studies', 'Academic', 'Lab Equipment Issue', 'The computers in Lab 101 are not working properly'),
-('Mohamed Asfak', 'ict23027', 'ict23027@std.uwu.ac.lk', 'Applied Sciences', 'Facility', 'Broken Chair', 'Chair in classroom 205 is broken and needs replacement');
+('Mohamed Nusrath', 'ict23090', 'ict23090@std.uwu.ac.lk', 'Technological Studies', 'Academic', 'Computers in CAD/CAM Lab Not Working', 'In our faculty CAD/CAM (computer lab), the computers are not working. We couldn’t do our academic practicals properly, and we are not satisfied with it. Staff members are also struggling to conduct practicals.'),
+('Mohamed Asfak', 'ict23027', 'ict23027@std.uwu.ac.lk', 'Applied Sciences', 'Facility', 'Broken Chair', 'Chair in lecture room 01 is broken and needs replacement');
