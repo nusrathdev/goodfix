@@ -40,7 +40,7 @@ if (!$complaint) {
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">
-                            <i class="bi bi-file-earmark-text"></i> Complaint Details
+                            Complaint Details
                         </h5>
                     </div>
                     <div class="card-body">
@@ -55,7 +55,7 @@ if (!$complaint) {
                             <div class="col-md-6">
                                 <h6 class="fw-bold">Reference Number:</h6>
                                 <div class="d-flex align-items-center">
-                                    <p class="text-primary fs-4 fw-bold mb-0 me-3" id="referenceNumber"><?php echo $reference_no; ?></p>
+                                    <p class="text-primary fs-5 fw-bold mb-0 me-3" id="referenceNumber"><?php echo $reference_no; ?></p>
                                     <button class="btn btn-outline-primary btn-sm" onclick="copyReference()" id="copyBtn">
                                         <i class="bi bi-copy"></i> Copy
                                     </button>
@@ -70,10 +70,10 @@ if (!$complaint) {
                             </div>
                             <div class="col-md-6">
                                 <h6 class="fw-bold">Status:</h6>
-                                <span class="badge bg-warning text-dark">Pending</span>
+                                <span class="status">Pending</span>
                                 
                                 <h6 class="fw-bold mt-3">Priority:</h6>
-                                <span class="badge priority-<?php echo $complaint['priority']; ?>">
+                                <span class="priority">
                                     <?php echo ucfirst($complaint['priority']); ?>
                                 </span>
                                 
@@ -98,7 +98,7 @@ if (!$complaint) {
                         <i class="bi bi-info-circle"></i> Important Information
                     </h5>
                     <ul class="mb-0">
-                        <li><strong>Save your Complaint ID:</strong> #<?php echo str_pad($complaint['id'], 4, '0', STR_PAD_LEFT); ?> for future reference</li>
+                        <li><strong>Save your reference number:</strong> #<?php echo $reference_no; ?></li>
                         <li><strong>Track your complaint:</strong> Use the tracking page to check status updates</li>
                         <li><strong>Email updates:</strong> You'll receive notifications at <?php echo htmlspecialchars($complaint['email']); ?></li>
                         <li><strong>Response time:</strong> Most complaints are reviewed within 24-48 hours</li>
@@ -112,10 +112,10 @@ if (!$complaint) {
                             <i class="bi bi-search"></i> Track This Complaint
                         </a>
                         <a href="submit_complaint.php" class="btn btn-outline-primary">
-                            <i class="bi bi-plus-circle"></i> Submit Another
+                            Submit Another
                         </a>
-                        <a href="index.php" class="btn btn-outline-secondary">
-                            <i class="bi bi-house"></i> Back to Home
+                        <a href="index.php" class="btn btn-outline-primary ms-auto">
+                            <i class="bi bi-arrow-left"></i> Back to Home
                         </a>
                     </div>
                 </div>
@@ -130,11 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show important notice about reference number
     setTimeout(function() {
         const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-warning alert-dismissible fade show position-fixed';
+        alertDiv.className = 'alert alert-primary alert-dismissible fade show position-fixed';
         alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
         alertDiv.innerHTML = `
-            <i class="bi bi-exclamation-triangle"></i> <strong>Important!</strong><br>
-            Please save your reference number <strong><?php echo $reference_no; ?></strong> to track your complaint.
+            <strong>Important!</strong><br>
+            Please save your reference number to track your complaint.
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
         document.body.appendChild(alertDiv);
@@ -155,23 +155,23 @@ function copyReference() {
     
     navigator.clipboard.writeText(referenceNumber).then(function() {
         // Update button to show success
-        copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        copyBtn.innerHTML = 'Copied!';
         copyBtn.classList.remove('btn-outline-primary');
-        copyBtn.classList.add('btn-success');
+        copyBtn.classList.add('btn-primary');
         
         // Revert button after 2 seconds
         setTimeout(function() {
-            copyBtn.innerHTML = '<i class="bi bi-copy"></i> Copy';
-            copyBtn.classList.remove('btn-success');
+            copyBtn.innerHTML = 'Copy';
+            copyBtn.classList.remove('btn-primary');
             copyBtn.classList.add('btn-outline-primary');
         }, 2000);
         
         // Show success message
         const successDiv = document.createElement('div');
-        successDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        successDiv.className = 'alert alert-primary alert-dismissible fade show position-fixed';
         successDiv.style.cssText = 'bottom: 20px; right: 20px; z-index: 9999; max-width: 300px;';
         successDiv.innerHTML = `
-            <i class="bi bi-clipboard-check"></i> Reference number copied to clipboard!
+            Reference number copied!
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         `;
         document.body.appendChild(successDiv);
@@ -190,24 +190,17 @@ function copyReference() {
         document.execCommand('copy');
         document.body.removeChild(textArea);
         
-        copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+        copyBtn.innerHTML = 'Copied!';
         copyBtn.classList.remove('btn-outline-primary');
-        copyBtn.classList.add('btn-success');
+        copyBtn.classList.add('btn-primary');
         
         setTimeout(function() {
-            copyBtn.innerHTML = '<i class="bi bi-copy"></i> Copy';
-            copyBtn.classList.remove('btn-success');
+            copyBtn.innerHTML = 'Copy';
+            copyBtn.classList.remove('btn-primary');
             copyBtn.classList.add('btn-outline-primary');
         }, 2000);
     });
 }
 </script>
-            if (alertDiv.parentNode) {
-                alertDiv.remove();
-            }
-        }, 5000);
-    }, 1000);
-});
-</script>
-
+           
 <?php include '../includes/footer.php'; ?>

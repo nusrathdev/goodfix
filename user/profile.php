@@ -13,7 +13,7 @@ include '../includes/header.php';
                 <!-- Header -->
                 <div class="text-center mb-5">
                     <h1 class="fw-bold">
-                        <i class="bi bi-person-circle text-primary"></i> My Profile
+                        My Profile
                     </h1>
                     <p class="lead text-muted">Manage your saved information and complaint history</p>
                 </div>
@@ -61,7 +61,7 @@ include '../includes/header.php';
                                      Save Information
                                 </button>
                                 <button type="button" class="btn btn-link text-primary ms-auto" onclick="clearProfile()">
-                                    <i class="bi bi-trash"></i> Clear All Data
+                                    Clear All Data
                                 </button>
                             </div>
                         </form>

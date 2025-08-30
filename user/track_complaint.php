@@ -66,7 +66,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                 <!-- Header -->
                 <div class="text-center mb-5">
                     <h1 class="fw-bold">
-                        <i class="bi bi-search text-primary"></i> Track Your Complaint
+                      Track Your Complaint
                     </h1>
                     <p class="lead text-muted">Enter your complaint reference number to check status and updates</p>
                 </div>
@@ -76,7 +76,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="mb-0">
-                            <i class="bi bi-hash text-primary"></i> Find Your Complaint
+                            Find Your Complaint
                         </h5>
                         <p class="mb-0 text-muted small mt-1">Use the reference number provided when you submitted your complaint</p>
                     </div>
@@ -136,9 +136,9 @@ if ($_POST && isset($_POST['reference_no'])) {
                 <div class="card">
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="bi bi-file-earmark-text"></i> Reference: <?php echo $reference_no; ?>
+                            Reference: <?php echo $reference_no; ?>
                         </h5>
-                        <span class="badge status-<?php echo $complaint['status']; ?>">
+                        <span class="status text-white">
                             <?php echo ucfirst(str_replace('_', ' ', $complaint['status'])); ?>
                         </span>
                     </div>
@@ -156,7 +156,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                                 <p><strong>Reference:</strong> <span class="text-primary fw-bold"><?php echo $reference_no; ?></span></p>
                                 <p><strong>Type:</strong> <?php echo htmlspecialchars($complaint['complaint_type']); ?></p>
                                 <p><strong>Priority:</strong> 
-                                    <span class="badge priority-<?php echo $complaint['priority']; ?>">
+                                    <span class="priority">
                                         <?php echo ucfirst($complaint['priority']); ?>
                                     </span>
                                 </p>
@@ -198,7 +198,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                                 </div>
                                 <div class="text-center">
                                     <div class="step-circle <?php echo ($complaint['status'] == 'closed') ? 'active' : ''; ?>">
-                                        <i class="bi bi-archive"></i>
+                                        <i class="bi bi-x-circle"></i>
                                     </div>
                                     <small>Closed</small>
                                 </div>
@@ -211,13 +211,13 @@ if ($_POST && isset($_POST['reference_no'])) {
                 <div class="text-center mt-4">
                     <div class="d-flex gap-3 justify-content-center">
                         <a href="track_complaint.php" class="btn btn-outline-primary">
-                            <i class="bi bi-search"></i> Track Another
+                            Track Another
                         </a>
-                        <a href="submit_complaint.php" class="btn btn-outline-success">
-                            <i class="bi bi-plus-circle"></i> Submit New Complaint
+                        <a href="submit_complaint.php" class="btn btn-outline-primary">
+                            Submit New Complaint
                         </a>
-                        <a href="index.php" class="btn btn-outline-secondary">
-                            <i class="bi bi-house"></i> Back to Home
+                        <a href="index.php" class="btn btn-outline-primary ms-auto">
+                            <i class="bi bi-arrow-left"></i> Back to Home
                         </a>
                     </div>
                 </div>
@@ -264,10 +264,9 @@ if ($_POST && isset($_POST['reference_no'])) {
 }
 </style>
 
-<!-- Simplified JavaScript without browser save system -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Enhanced form validation
+    // form validation
     const form = document.querySelector('form');
     const referenceInput = document.getElementById('reference_no');
     
@@ -312,12 +311,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Show copied notification
                     const originalText = element.textContent;
                     element.textContent = 'Copied!';
-                    element.classList.add('text-success');
+                    element.classList.add('text-primary');
                     
+                    // remove copied notification
                     setTimeout(function() {
                         element.textContent = originalText;
-                        element.classList.remove('text-success');
-                        element.classList.add('text-primary');
                     }, 1500);
                 });
             });

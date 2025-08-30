@@ -28,7 +28,7 @@ include '../includes/header.php';
                     </div>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <h2 class="text-white-50">University Complaint System</h2>
+                    <h2 class="text-white-50"> Uva Wellassa University <br> Complaint Management System</h2>
                 </div>
             </div>
         </div>
@@ -106,13 +106,13 @@ include '../includes/header.php';
                                                pattern="^GFX-\d{6}-\d+-[A-Z0-9]{4}$"
                                                required>
                                         <button type="submit" class="btn btn-primary">
-                                            <i class="bi bi-search"></i> Track
+                                            Track
                                         </button>
                                     </form>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="text-primary">
-                                        <i class="bi bi-shield-check" style="font-size: 4rem; opacity: 0.3;"></i>
+                                        <i class="bi bi-search" style="font-size: 4rem; opacity: 0.3;"></i>
                                     </div>
                                 </div>
                             </div>
