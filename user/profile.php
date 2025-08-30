@@ -47,11 +47,11 @@ include '../includes/header.php';
                                     <label for="faculty" class="form-label">Faculty</label>
                                     <select class="form-select" id="faculty">
                                         <option value="">Select Faculty</option>
-                                        <option value="Computer Science">Computer Science</option>
-                                        <option value="Engineering">Engineering</option>
-                                        <option value="Business">Business</option>
-                                        <option value="Arts">Arts</option>
-                                        <option value="Science">Science</option>
+                                        <option value="Technological Studies">Technological Studies</option>
+                                        <option value="Applied Sciences">Applied Sciences</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Medicine">Medicine</option>
+                                        <option value="Animal Science & Export Agriculture">Animal Science & Export Agriculture</option>
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>

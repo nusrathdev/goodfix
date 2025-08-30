@@ -95,11 +95,11 @@ if ($_POST) {
                                     <label for="faculty" class="form-label">Faculty</label>
                                     <select class="form-select" id="faculty" name="faculty">
                                         <option value="">Select Faculty</option>
-                                        <option value="Computer Science" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Computer Science') ? 'selected' : ''; ?>>Computer Science</option>
-                                        <option value="Engineering" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Engineering') ? 'selected' : ''; ?>>Engineering</option>
-                                        <option value="Business" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Business') ? 'selected' : ''; ?>>Business</option>
-                                        <option value="Arts" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
-                                        <option value="Science" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Science') ? 'selected' : ''; ?>>Science</option>
+                                        <option value="Technological Studies" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Technological Studies') ? 'selected' : ''; ?>>Technological Studies</option>
+                                        <option value="Applied Sciences" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Applied Sciences') ? 'selected' : ''; ?>>Applied Sciences</option>
+                                        <option value="Management" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Management') ? 'selected' : ''; ?>>Management</option>
+                                        <option value="Medicine" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Medicine') ? 'selected' : ''; ?>>Medicine</option>
+                                        <option value="Animal Science & Export Agriculture" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Animal Science & Export Agriculture') ? 'selected' : ''; ?>>Animal Science & Export Agriculture</option>
                                         <option value="Other" <?php echo (isset($_POST['faculty']) && $_POST['faculty'] == 'Other') ? 'selected' : ''; ?>>Other</option>
                                     </select>
                                 </div>
