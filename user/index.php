@@ -48,7 +48,7 @@ include '../includes/header.php';
                 <div class="col-md-4">
                     <div class="card h-100 text-center">
                         <div class="card-body">
-                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 50px; height: 50px;">
                                 <strong>1</strong>
                             </div>
                             <h5 class="card-title">Submit Complaint</h5>
@@ -95,11 +95,11 @@ include '../includes/header.php';
                     <div class="card mb-4 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="row align-items-center">
-                                <div class="col-md-8">
+                                <div class="col-md-8 text-start">
                                     <h5 class="mb-2">
-                                        <i class="bi bi-search text-primary me-2"></i>Track Existing Complaint
+                                        Track Existing Complaint
                                     </h5>
-                                    <p class="text-muted mb-3">Already have a reference number? Enter it below to check your complaint status instantly.</p>
+                                    <p class="text-muted mb-3">Already have a reference number ? <br> Enter it below to check your complaint status instantly.</p>
                                     <form method="POST" action="track_complaint.php" class="d-flex gap-2">
                                         <input type="text" name="reference_no" class="form-control" 
                                                placeholder="Enter reference (e.g., GFX-202508-1234-A7B9)" 
