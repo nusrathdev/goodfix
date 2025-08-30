@@ -146,7 +146,7 @@ include '../includes/header.php';
                             </div>
                             <div class="col-md-4 text-end">
                                 <small class="text-muted">
-                                    Need help? <a href="mailto:support@university.edu" class="text-decoration-none">Contact Support</a>
+                                    Need help? <a href="mailto:support@uwu.ac.lk" class="text-decoration-none">Contact Support</a>
                                 </small>
                             </div>
                         </div>
