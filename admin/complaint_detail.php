@@ -60,7 +60,6 @@ if (!$complaint) {
                 $reference_no = 'GFX-' . $year_month . '-' . $complaint_id_padded . '-' . $hash;
                 ?>
                 <h1 class="fw-bold">
-                    <i class="bi bi-file-earmark-text text-primary"></i> 
                     Reference: <?php echo $reference_no; ?>
                 </h1>
                 <p class="text-muted mb-0">
@@ -79,7 +78,7 @@ if (!$complaint) {
 
         <!-- Success Message -->
         <?php if (isset($success_message)): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle"></i> <?php echo $success_message; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
@@ -91,7 +90,7 @@ if (!$complaint) {
                 <div class="card">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">
-                            <i class="bi bi-info-circle"></i> Complaint Information
+                            Complaint Information
                         </h5>
                     </div>
                     <div class="card-body">
@@ -184,7 +183,7 @@ if (!$complaint) {
                             <div class="timeline">
                                 <div class="timeline-item active">
                                     <div class="timeline-marker bg-primary">
-                                        <i class="bi bi-plus-circle text-white"></i>
+                                        <i class="bi bi-plus-circle m-auto text-white"></i>
                                     </div>
                                     <div class="timeline-content">
                                         <h6 class="mb-1">Complaint Submitted</h6>
@@ -196,8 +195,8 @@ if (!$complaint) {
 
                                 <?php if ($complaint['status'] != 'pending'): ?>
                                 <div class="timeline-item active">
-                                    <div class="timeline-marker bg-warning">
-                                        <i class="bi bi-gear text-white"></i>
+                                    <div class="timeline-marker bg-primary">
+                                        <i class="bi bi-gear m-auto text-white"></i>
                                     </div>
                                     <div class="timeline-content">
                                         <h6 class="mb-1">Processing Started</h6>
@@ -208,8 +207,8 @@ if (!$complaint) {
 
                                 <?php if ($complaint['status'] == 'resolved' || $complaint['status'] == 'closed'): ?>
                                 <div class="timeline-item active">
-                                    <div class="timeline-marker bg-success">
-                                        <i class="bi bi-check-circle text-white"></i>
+                                    <div class="timeline-marker bg-primary">
+                                        <i class="bi bi-check-circle m-auto text-white"></i>
                                     </div>
                                     <div class="timeline-content">
                                         <h6 class="mb-1">Issue Resolved</h6>
@@ -222,8 +221,8 @@ if (!$complaint) {
 
                                 <?php if ($complaint['status'] == 'closed'): ?>
                                 <div class="timeline-item active">
-                                    <div class="timeline-marker bg-secondary">
-                                        <i class="bi bi-archive text-white"></i>
+                                    <div class="timeline-marker bg-primary">
+                                        <i class="bi bi-x-circle m-auto text-white"></i>
                                     </div>
                                     <div class="timeline-content">
                                         <h6 class="mb-1">Complaint Closed</h6>
@@ -319,7 +318,7 @@ if (!$complaint) {
 .timeline::before {
     content: '';
     position: absolute;
-    left: 15px;
+    left: 21px;
     top: 0;
     bottom: 0;
     width: 2px;
