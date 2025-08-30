@@ -32,31 +32,32 @@ GoodFix is a web-based complaint management system designed specifically for uni
 ## 📁 Project Structure
 
 ```
-web_devproject-1/
+web_devproject/
 ├── admin/                      # Admin panel files
-│   ├── complaint_detail.php   # Detailed complaint view
-│   ├── dashboard.php          # Admin dashboard
-│   ├── login.php             # Admin login
-│   ├── logout.php            # Admin logout
-│   └── view_complaints.php   # Complaints listing
-├── assets/                   # Static assets (if needed)
+│   ├── complaint_detail.php    # Detailed complaint view
+│   ├── dashboard.php           # Admin dashboard
+│   ├── login.php               # Admin login
+│   ├── logout.php              # Admin logout
+│   └── view_complaints.php     # Complaints listing
+├── assets/                     # Static assets (if needed)
 ├── css/
-│   └── style.css            # Custom styles
-├── includes/                # Shared PHP files
-│   ├── auth.php            # Authentication functions
-│   ├── db.php              # Database connection
-│   ├── footer.php          # Footer template
-│   └── header.php          # Header template
+│   └── style.css               # Custom styles
+├── includes/                   # Shared PHP files
+│   ├── auth.php                # Authentication functions
+│   ├── db.php                  # Database connection
+│   ├── footer.php              # Footer template
+│   └── header.php              # Header template
 ├── js/
-│   └── script.js           # Custom JavaScript
+│   └── script.js               # Custom JavaScript
 ├── sql/
-│   └── complaints.sql      # Database schema and sample data
-├── user/                   # Student-facing pages
-│   ├── index.php          # Homepage
-│   ├── submit_complaint.php # Complaint submission form
-│   ├── submit_success.php  # Success page
-│   └── track_complaint.php # Complaint tracking
-└── README.md              # This file
+│   └── complaints.sql          # Database schema and sample data
+├── user/                       # Student-facing pages
+│   ├── index.php               # Homepage
+│   ├── submit_complaint.php    # Complaint submission form
+│   ├── submit_success.php      # Success page
+│   └── track_complaint.php     # Complaint tracking
+├── index.php                   # Home Page
+└── README.md                   # This file
 ```
 
 ## 🚀 Installation & Setup
