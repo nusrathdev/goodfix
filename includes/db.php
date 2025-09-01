@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'goodfix_complaints';
 $username = 'root';
-$password = '';
+$password = 'root';
 
 try {
     // Create PDO connection

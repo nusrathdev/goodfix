@@ -1,3 +1,3 @@
 <?php
-header("Location: ../web/user/index.php");
+header("Location: ../goodfix/user/index.php");
 ?>

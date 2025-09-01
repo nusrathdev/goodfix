@@ -109,7 +109,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                             <ul class="small text-muted mb-0">
                                 <li>Check your email for the confirmation message</li>
                                 <li>Look for the reference number in your submission receipt</li>
-                                <li>Contact support at <a href="mailto:support@uwu.ac.lk">support@uwu.ac.lk</a></li>
+                                <li>Contact support at <a href="mailto:complaint@uwu.ac.lk">support@uwu.ac.lk</a></li>
                             </ul>
                         </div>
                     </div>
