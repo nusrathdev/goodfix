@@ -1,6 +1,6 @@
-# GoodFix - University Complaint Management System
+# goodfix - University Complaint Management System
 
-GoodFix is a web-based complaint management system designed specifically for universities to help students easily submit their issues and allow staff/administrators to efficiently track and manage all complaints in one centralized location.
+goodfix is a web-based complaint management system designed specifically for universities to help students easily submit their issues and allow staff/administrators to efficiently track and manage all complaints in one centralized location.
 
 ## 🚀 Features
 
@@ -32,7 +32,7 @@ GoodFix is a web-based complaint management system designed specifically for uni
 ## 📁 Project Structure
 
 ```
-web_devproject/
+goodfix/
 ├── admin/                      # Admin panel files
 │   ├── complaint_detail.php    # Detailed complaint view
 │   ├── dashboard.php           # Admin dashboard
@@ -71,8 +71,8 @@ web_devproject/
 
 ### Step 1: Clone/Download
 ```bash
-git clone https://github.com/nusrathdev/web_devproject.git
-cd web_devproject
+git clone https://github.com/nusrathdev/goodfix.git
+cd goodfix
 ```
 
 ### Step 2: Database Setup
@@ -94,7 +94,7 @@ $password = 'your_password';     // db password
 ### Step 4: Set Permissions
 Ensure the web server has read access to all files:
 ```bash
-chmod -R 755 web_devproject/
+chmod -R 755 goodfix/
 ```
 
 ### Step 5: Access the Application
@@ -219,7 +219,7 @@ ini_set('display_errors', 1);
 
 ## 📄 License
 
-This project GoodFix - Complaint Management System is developed by
+This project goodfix - Complaint Management System is developed by
 
 P. Pirathiska (UWU/ICT/23/095)
 
@@ -238,4 +238,4 @@ Unauthorized copying, modification, or distribution of this work, in whole or in
 
 ---
 
-**GoodFix** - Making university life better, one complaint at a time! 🎓✨
+**goodfix** - Making university life better, one complaint at a time! 🎓✨
