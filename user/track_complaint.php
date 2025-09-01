@@ -9,7 +9,7 @@ include '../includes/db.php';
 $complaint = null;
 $error_message = '';
 
-// Check if complaint ID is provided
+// Check if complaint ID is available
 if (isset($_GET['id'])) {
     $complaint_id = (int)$_GET['id'];
     
@@ -22,25 +22,22 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Handle search form
+// search form
 if ($_POST && isset($_POST['reference_no'])) {
     $reference_no = trim($_POST['reference_no']);
     
     if (empty($reference_no)) {
         $error_message = "Please enter a reference number.";
     } else {
-        // Extract the complaint ID from the reference number
-        // Reference format: GFX-YYYYMM-XXXX-HASH (e.g., GFX-202508-1234-A7B9)
+        // Extract reference number
+        // Reference format: GFX-YYYYMM-XXXX-HASH
         if (preg_match('/^GFX-\d{6}-(\d+)-[A-Z0-9]{4}$/', $reference_no, $matches)) {
             $complaint_id = (int)$matches[1];
-            
-            // Verify the hash matches
             $stmt = $pdo->prepare("SELECT * FROM complaints WHERE id = ?");
             $stmt->execute([$complaint_id]);
             $temp_complaint = $stmt->fetch();
             
             if ($temp_complaint) {
-                // Generate expected hash for verification
                 $expected_hash = strtoupper(substr(md5($temp_complaint['id'] . $temp_complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
                 $provided_hash = substr($reference_no, -4);
                 
@@ -63,7 +60,7 @@ if ($_POST && isset($_POST['reference_no'])) {
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <!-- Header -->
+                <!-- Head -->
                 <div class="text-center mb-5">
                     <h1 class="fw-bold">
                       Track Your Complaint
@@ -71,7 +68,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                     <p class="lead text-muted">Enter your complaint reference number to check status and updates</p>
                 </div>
 
-                <!-- Search Form -->
+                <!-- search form -->
                 <?php if (!$complaint): ?>
                 <div class="card mb-4">
                     <div class="card-header">
@@ -101,7 +98,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                             </button>
                         </form>
                         
-                        <!-- Help Section -->
+                        <!-- help section -->
                         <div class="mt-4 p-3 bg-light rounded">
                             <h6 class="text-primary mb-2">
                                 <i class="bi bi-question-circle me-1"></i>Can't find your reference number?
@@ -116,7 +113,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                 </div>
                 <?php endif; ?>
 
-                <!-- Error Message -->
+                <!-- error message -->
                 <?php if ($error_message): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-triangle"></i> <?php echo $error_message; ?>
@@ -124,10 +121,9 @@ if ($_POST && isset($_POST['reference_no'])) {
                 </div>
                 <?php endif; ?>
 
-                <!-- Complaint Details -->
+                <!-- complaint details -->
                 <?php if ($complaint): ?>
                 <?php 
-                // Generate complex reference number format: GFX-YYYYMM-XXXX-HASH
                 $year_month = date('Ym', strtotime($complaint['submitted_at']));
                 $complaint_id_padded = str_pad($complaint['id'], 4, '0', STR_PAD_LEFT);
                 $hash = strtoupper(substr(md5($complaint['id'] . $complaint['submitted_at'] . 'GoodFix2025'), 0, 4));
@@ -172,8 +168,6 @@ if ($_POST && isset($_POST['reference_no'])) {
                         
                         <h6 class="fw-bold">Description:</h6>
                         <p><?php echo nl2br(htmlspecialchars($complaint['description'])); ?></p>
-                        
-                        <!-- Status Progress -->
                         <hr>
                         <h6 class="fw-bold">Progress Tracking:</h6>
                         <div class="progress-steps">
@@ -207,7 +201,7 @@ if ($_POST && isset($_POST['reference_no'])) {
                     </div>
                 </div>
 
-                <!-- Actions -->
+                <!-- BUttons-->
                 <div class="text-center mt-4">
                     <div class="d-flex gap-3 justify-content-center">
                         <a href="track_complaint.php" class="btn btn-outline-primary">
@@ -227,7 +221,7 @@ if ($_POST && isset($_POST['reference_no'])) {
     </div>
 </main>
 
-<!-- Additional CSS for progress steps -->
+<!-- Additional CSS -->
 <style>
 .step-circle {
     width: 40px;
@@ -265,13 +259,13 @@ if ($_POST && isset($_POST['reference_no'])) {
 </style>
 
 <script>
+// form validation
 document.addEventListener('DOMContentLoaded', function() {
-    // form validation
     const form = document.querySelector('form');
     const referenceInput = document.getElementById('reference_no');
     
     if (form && referenceInput) {
-        // Real-time validation
+        // Realtime validation
         referenceInput.addEventListener('input', function() {
             const value = this.value.toUpperCase();
             this.value = value;
@@ -289,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.value = value;
         });
         
-        // Form submission with loading state
+        // Form submission
         form.addEventListener('submit', function() {
             const submitBtn = form.querySelector('button[type="submit"]');
             if (submitBtn) {
@@ -299,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Copy reference number functionality
+    // Copy reference number
     const referenceElements = document.querySelectorAll('.text-primary.fw-bold');
     referenceElements.forEach(function(element) {
         if (element.textContent.startsWith('GFX-')) {
