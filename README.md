@@ -79,7 +79,7 @@ cd goodfix
 1. Create a MySQL database named `goodfix_db`
 2. Import the SQL file:
 ```bash
-mysql -u your_username -p goodfix_db < sql/complaints.sql
+mysql -u your_username -p goodfix_complaints < sql/complaints.sql
 ```
 
 ### Step 3: Configure Database Connection
