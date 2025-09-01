@@ -39,7 +39,8 @@ web_devproject/
 │   ├── login.php               # Admin login
 │   ├── logout.php              # Admin logout
 │   └── view_complaints.php     # Complaints listing
-├── assets/                     # Static assets (if needed)
+├── res/                        # Resources
+│   └── cms-logo.php            # official logo of management system
 ├── css/
 │   └── style.css               # Custom styles
 ├── includes/                   # Shared PHP files
@@ -63,7 +64,7 @@ web_devproject/
 ## 🚀 Installation & Setup
 
 ### Prerequisites
-- Web server (Apache/Nginx)
+- Apache Web Server (local)
 - PHP 8.0 or higher
 - MySQL 5.7 or higher
 - PDO PHP extension
