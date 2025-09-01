@@ -71,7 +71,7 @@ $complaints = $stmt->fetchAll();
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h1 class="fw-bold">
-                    <i class="bi bi-list-ul text-primary"></i> All Complaints
+                    </i> All Complaints
                 </h1>
                 <p class="text-muted mb-0">Manage and track student complaints</p>
             </div>
@@ -119,7 +119,7 @@ $complaints = $stmt->fetchAll();
         <?php if (empty($complaints)): ?>
         <div class="card">
             <div class="card-body text-center py-5">
-                <i class="bi bi-inbox fs-1 text-muted"></i>
+                <i class="bi bi-file-text fs-1 text-muted"></i>
                 <h4 class="mt-3">No Complaints Found</h4>
                 <p class="text-muted">
                     <?php if ($filter || $search): ?>
@@ -129,7 +129,7 @@ $complaints = $stmt->fetchAll();
                     <?php endif; ?>
                 </p>
                 <a href="view_complaints.php" class="btn btn-primary">
-                    <i class="bi bi-list-ul"></i> View All Complaints
+                    <i class="bi bi-eye"></i> View All Complaints
                 </a>
             </div>
         </div>

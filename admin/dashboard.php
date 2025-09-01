@@ -98,7 +98,7 @@ $priority_stats = $stmt->fetchAll();
         <!-- Recent Complaints & Priority Stats -->
         <div class="row g-4">
             <!-- Recent Complaints -->
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
@@ -165,7 +165,7 @@ $priority_stats = $stmt->fetchAll();
             </div>
 
             <!-- Priority Distribution -->
-            <div class="col-lg-4">
+            <div class="col-lg-3 ms-auto">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0">
