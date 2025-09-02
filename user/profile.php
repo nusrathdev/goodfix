@@ -188,8 +188,6 @@ function clearProfile() {
         // Hide cards
         document.getElementById('complaintsHistoryCard').style.display = 'none';
         document.getElementById('statsCard').style.display = 'none';
-        
-        showAlert('All data cleared successfully!', 'warning');
     }
 }
 
