@@ -22,7 +22,7 @@ include '../includes/header.php';
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="mb-0">
-                            <i class="bi bi-person-lines-fill"></i> Saved Information
+                            Saved Information
                             <small class="text-muted float-end">Stored in your browser</small>
                         </h5>
                     </div>
